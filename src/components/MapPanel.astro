@@ -1,0 +1,200 @@
+---
+
+---
+
+<section id="solutions" class="py-16 lg:py-24 bg-soft-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <!-- Left - Map Visualization -->
+      <div class="relative order-2 lg:order-1">
+        <div class="relative bg-navy rounded-2xl overflow-hidden shadow-2xl">
+          <!-- Map Header -->
+          <div class="px-6 py-4 border-b border-white/10 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 bg-teal/20 rounded-lg flex items-center justify-center">
+                <svg class="w-4 h-4 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                </svg>
+              </div>
+              <span class="text-white font-medium">Live Fleet View</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+              <span class="text-green-400 text-sm">Live</span>
+            </div>
+          </div>
+
+          <!-- Map Content -->
+          <div class="relative h-[350px] lg:h-[420px] bg-navy-light">
+            <svg class="absolute inset-0 w-full h-full" viewBox="0 0 500 400" preserveAspectRatio="xMidYMid slice">
+              <!-- Grid -->
+              <defs>
+                <pattern id="mapGrid" width="50" height="50" patternUnits="userSpaceOnUse">
+                  <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#1a2030" stroke-width="1"/>
+                </pattern>
+                <linearGradient id="routeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#3BAFAF"/>
+                  <stop offset="100%" stop-color="#3EDFF3"/>
+                </linearGradient>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#mapGrid)" />
+              
+              <!-- Roads/Streets representation -->
+              <path d="M 0 200 L 500 200" stroke="#1a2030" stroke-width="20"/>
+              <path d="M 250 0 L 250 400" stroke="#1a2030" stroke-width="15"/>
+              <path d="M 100 100 L 400 300" stroke="#1a2030" stroke-width="10"/>
+              
+              <!-- Active Routes -->
+              <path d="M 80 320 Q 150 280 200 300 T 300 260 T 420 220" fill="none" stroke="url(#routeGradient)" stroke-width="4" stroke-linecap="round">
+                <animate attributeName="stroke-dasharray" values="0,1000;1000,0" dur="3s" repeatCount="indefinite"/>
+              </path>
+              
+              <path d="M 60 180 Q 150 150 250 170 T 400 140" fill="none" stroke="#3BAFAF" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 4"/>
+              
+              <!-- Warehouse/Hub -->
+              <g transform="translate(80, 320)">
+                <rect x="-15" y="-12" width="30" height="24" rx="4" fill="#203AAC"/>
+                <rect x="-10" y="-6" width="8" height="12" fill="#3EDFF3"/>
+                <rect x="2" y="-6" width="8" height="12" fill="#3EDFF3"/>
+              </g>
+              
+              <!-- Trucks -->
+              <g transform="translate(200, 290)">
+                <rect x="-10" y="-6" width="20" height="12" rx="2" fill="#3BAFAF"/>
+                <circle cx="-5" cy="6" r="3" fill="#10141C"/>
+                <circle cx="5" cy="6" r="3" fill="#10141C"/>
+                <circle cx="0" cy="0" r="12" fill="#3BAFAF" fill-opacity="0.2">
+                  <animate attributeName="r" values="12;18;12" dur="2s" repeatCount="indefinite"/>
+                  <animate attributeName="fill-opacity" values="0.2;0;0.2" dur="2s" repeatCount="indefinite"/>
+                </circle>
+              </g>
+              
+              <g transform="translate(320, 250)">
+                <rect x="-10" y="-6" width="20" height="12" rx="2" fill="#3EDFF3"/>
+                <circle cx="-5" cy="6" r="3" fill="#10141C"/>
+                <circle cx="5" cy="6" r="3" fill="#10141C"/>
+              </g>
+              
+              <g transform="translate(250, 165)">
+                <rect x="-10" y="-6" width="20" height="12" rx="2" fill="#3BAFAF"/>
+                <circle cx="-5" cy="6" r="3" fill="#10141C"/>
+                <circle cx="5" cy="6" r="3" fill="#10141C"/>
+              </g>
+              
+              <!-- Destination -->
+              <g transform="translate(420, 220)">
+                <circle r="10" fill="#3EDFF3"/>
+                <circle r="15" fill="#3EDFF3" fill-opacity="0.3"/>
+                <circle r="5" fill="#10141C"/>
+              </g>
+              
+              <!-- Location Pins -->
+              <g transform="translate(150, 140)">
+                <circle r="6" fill="#203AAC"/>
+              </g>
+              <g transform="translate(350, 130)">
+                <circle r="6" fill="#203AAC"/>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Map Footer Stats -->
+          <div class="px-6 py-4 bg-navy border-t border-white/10">
+            <div class="grid grid-cols-3 gap-4">
+              <div class="text-center">
+                <div class="text-2xl font-bold text-cyan">24</div>
+                <div class="text-xs text-gray-400">Active Vehicles</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-teal">18</div>
+                <div class="text-xs text-gray-400">Deliveries Today</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-white">96%</div>
+                <div class="text-xs text-gray-400">On Schedule</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Card -->
+        <div class="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-xl p-4 w-56 hidden lg:block">
+          <div class="flex items-start gap-3">
+            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <div class="text-sm font-semibold text-navy">Delivery Complete</div>
+              <div class="text-xs text-gray-500 mt-1">Order #4521 delivered to 123 Main St</div>
+              <div class="text-xs text-gray-400 mt-2">2 min ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right - Content -->
+      <div class="order-1 lg:order-2">
+        <div class="inline-flex items-center gap-2 bg-blue/10 text-blue px-4 py-2 rounded-full text-sm font-medium mb-6">
+          Live Monitoring
+        </div>
+        
+        <h2 class="text-3xl sm:text-4xl font-bold text-navy leading-tight">
+          Complete Visibility Over Your Fleet
+        </h2>
+        
+        <p class="mt-6 text-lg text-gray-600 leading-relaxed">
+          Monitor every vehicle in your fleet with real-time GPS tracking. 
+          Get instant updates on location, status, and estimated arrival times.
+        </p>
+
+        <ul class="mt-8 space-y-4">
+          <li class="flex items-start gap-3">
+            <div class="w-6 h-6 bg-teal/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-4 h-4 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <div class="font-semibold text-navy">Real-time GPS Tracking</div>
+              <div class="text-sm text-gray-500">Track vehicle locations with sub-second accuracy</div>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <div class="w-6 h-6 bg-teal/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-4 h-4 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <div class="font-semibold text-navy">Route Optimization</div>
+              <div class="text-sm text-gray-500">AI-powered route suggestions save time and fuel</div>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <div class="w-6 h-6 bg-teal/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-4 h-4 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <div class="font-semibold text-navy">Instant Alerts</div>
+              <div class="text-sm text-gray-500">Get notified about delays, stops, and arrivals</div>
+            </div>
+          </li>
+        </ul>
+
+        <a 
+          href="#demo" 
+          class="inline-flex items-center gap-2 mt-8 text-blue font-semibold hover:underline"
+        >
+          Learn more about tracking
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

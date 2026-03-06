@@ -3,7 +3,8 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --host",
+    "dev:poll": "CHOKIDAR_USEPOLLING=1 CHOKIDAR_INTERVAL=100 astro dev --host",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"

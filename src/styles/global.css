@@ -1,1 +1,25 @@
 @import "tailwindcss";
+
+@theme inline {
+  /* Xendar Color Palette */
+  --color-navy: oklch(0.15 0.03 260);
+  --color-navy-light: oklch(0.20 0.03 260);
+  --color-blue: oklch(0.45 0.20 265);
+  --color-blue-dark: oklch(0.38 0.18 265);
+  --color-teal: oklch(0.65 0.12 180);
+  --color-cyan: oklch(0.80 0.15 195);
+  --color-soft-white: oklch(0.96 0.01 180);
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #EDF3F3;
+  color: #10141C;
+  font-family: 'Inter', system-ui, sans-serif;
+}

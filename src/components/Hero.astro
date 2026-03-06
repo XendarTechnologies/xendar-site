@@ -1,0 +1,255 @@
+---
+---
+
+<section class="relative pt-28 lg:pt-36 pb-16 lg:pb-24 overflow-hidden">
+  <!-- Background Elements -->
+  <div class="absolute inset-0 -z-10">
+    <div
+      class="absolute top-20 right-0 w-[600px] h-[600px] bg-cyan/10 rounded-full blur-3xl"
+    >
+    </div>
+    <div
+      class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-teal/10 rounded-full blur-3xl"
+    >
+    </div>
+    <!-- Grid Pattern -->
+    <div
+      class="absolute inset-0 bg-[linear-gradient(to_right,#e5ebeb_1px,transparent_1px),linear-gradient(to_bottom,#e5ebeb_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-40"
+    >
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <!-- Left Content -->
+      <div class="max-w-xl">
+        <div
+          class="inline-flex items-center gap-2 bg-teal/10 text-teal px-4 py-2 rounded-full text-sm font-medium mb-6"
+        >
+          <span class="w-2 h-2 bg-teal rounded-full animate-pulse"></span>
+          Real-Time Fleet Tracking
+        </div>
+
+        <h1
+          class="text-4xl sm:text-5xl lg:text-6xl font-bold text-navy leading-tight text-balance"
+        >
+          Optimize Your
+          <span class="text-blue"> Logistics</span>
+          Operations
+        </h1>
+
+        <p class="mt-6 text-lg text-gray-600 leading-relaxed">
+          Track, manage, and optimize your fleet with Xendar's advanced
+          logistics platform. Gain complete visibility over your operations and
+          drive efficiency at scale.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 mt-8">
+          <a
+            href="#demo"
+            class="inline-flex items-center justify-center gap-2 bg-blue text-white px-6 py-3.5 rounded-xl font-semibold hover:bg-blue-dark transition-colors shadow-lg shadow-blue/25"
+          >
+            Request Demo
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </a>
+          <a
+            href="#features"
+            class="inline-flex items-center justify-center gap-2 bg-white text-navy px-6 py-3.5 rounded-xl font-semibold border border-gray-200 hover:border-gray-300 hover:bg-gray-100 transition-colors"
+          >
+            Get Started
+          </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-gray-200">
+          <div>
+            <div class="text-2xl lg:text-3xl font-bold text-navy">98%</div>
+            <div class="text-sm text-gray-500 mt-1">On-time delivery</div>
+          </div>
+          <div>
+            <div class="text-2xl lg:text-3xl font-bold text-navy">2.5M+</div>
+            <div class="text-sm text-gray-500 mt-1">Routes optimized</div>
+          </div>
+          <div>
+            <div class="text-2xl lg:text-3xl font-bold text-navy">500+</div>
+            <div class="text-sm text-gray-500 mt-1">Enterprise clients</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Content - Dashboard Preview -->
+      <div class="relative lg:pl-8">
+        <div
+          class="relative bg-white rounded-2xl shadow-2xl shadow-navy/10 border border-gray-200 overflow-hidden"
+        >
+          <!-- Dashboard Header -->
+          <div class="bg-navy px-4 py-3 flex items-center gap-2">
+            <div class="flex gap-1.5">
+              <div class="w-3 h-3 rounded-full bg-red-400"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+              <div class="w-3 h-3 rounded-full bg-green-400"></div>
+            </div>
+            <span class="text-white/60 text-sm ml-2">Xendar Dashboard</span>
+          </div>
+
+          <!-- Map Area -->
+          <div
+            class="relative h-[300px] lg:h-[380px] bg-gradient-to-br from-soft-white to-gray-100"
+          >
+            <!-- Stylized Map -->
+            <svg
+              class="absolute inset-0 w-full h-full"
+              viewBox="0 0 400 300"
+              preserveAspectRatio="xMidYMid slice"
+            >
+              <!-- Grid Lines -->
+              <defs>
+                <pattern
+                  id="grid"
+                  width="40"
+                  height="40"
+                  patternUnits="userSpaceOnUse"
+                >
+                  <path
+                    d="M 40 0 L 0 0 0 40"
+                    fill="none"
+                    stroke="#e5ebeb"
+                    stroke-width="1"></path>
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grid)"></rect>
+
+              <!-- Route Lines -->
+              <path
+                d="M 50 200 Q 100 150 150 180 T 250 120 T 350 160"
+                fill="none"
+                stroke="#3BAFAF"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-dasharray="8 4"
+                class="animate-pulse"></path>
+              <path
+                d="M 80 250 Q 150 200 200 220 T 300 180"
+                fill="none"
+                stroke="#203AAC"
+                stroke-width="3"
+                stroke-linecap="round"></path>
+
+              <!-- Location Markers -->
+              <circle cx="50" cy="200" r="8" fill="#203AAC"></circle>
+              <circle cx="50" cy="200" r="12" fill="#203AAC" fill-opacity="0.3"
+              ></circle>
+
+              <circle cx="150" cy="180" r="6" fill="#3BAFAF"></circle>
+              <circle cx="250" cy="120" r="6" fill="#3BAFAF"></circle>
+
+              <circle cx="350" cy="160" r="8" fill="#3EDFF3"></circle>
+              <circle cx="350" cy="160" r="12" fill="#3EDFF3" fill-opacity="0.3"
+              ></circle>
+
+              <!-- Truck Icons -->
+              <g transform="translate(200, 160)">
+                <rect
+                  x="-12"
+                  y="-8"
+                  width="24"
+                  height="16"
+                  rx="3"
+                  fill="#10141C"></rect>
+                <rect x="12" y="-6" width="8" height="12" rx="2" fill="#10141C"
+                ></rect>
+                <circle cx="-6" cy="8" r="4" fill="#3BAFAF"></circle>
+                <circle cx="6" cy="8" r="4" fill="#3BAFAF"></circle>
+              </g>
+            </svg>
+
+            <!-- Floating Info Card -->
+            <div
+              class="absolute top-4 right-4 bg-white rounded-xl shadow-lg p-4 w-48"
+            >
+              <div class="flex items-center gap-3 mb-3">
+                <div
+                  class="w-10 h-10 bg-teal/10 rounded-lg flex items-center justify-center"
+                >
+                  <svg
+                    class="w-5 h-5 text-teal"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    ></path>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-sm font-semibold text-navy">Truck #247</div>
+                  <div class="text-xs text-green-500 flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                    En Route
+                  </div>
+                </div>
+              </div>
+              <div class="space-y-2 text-sm">
+                <div class="flex justify-between">
+                  <span class="text-gray-500">Driver</span>
+                  <span class="text-navy font-medium">J. Martinez</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-500">ETA</span>
+                  <span class="text-navy font-medium">14:35</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Status Bar -->
+            <div
+              class="absolute bottom-0 left-0 right-0 bg-white/90 backdrop-blur-sm border-t border-gray-200 px-4 py-3 flex items-center justify-between"
+            >
+              <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                  <span class="text-sm text-gray-600">12 Active</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-yellow-500 rounded-full"></span>
+                  <span class="text-sm text-gray-600">3 Delayed</span>
+                </div>
+              </div>
+              <span class="text-xs text-gray-400">Live Tracking</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Decorative elements -->
+        <div
+          class="absolute -bottom-4 -left-4 w-24 h-24 bg-cyan/20 rounded-2xl -z-10"
+        >
+        </div>
+        <div
+          class="absolute -top-4 -right-4 w-16 h-16 bg-teal/20 rounded-xl -z-10"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

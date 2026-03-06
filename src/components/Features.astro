@@ -1,0 +1,105 @@
+---
+const features = [
+  {
+    icon: "location",
+    title: "Real-Time Fleet Tracking",
+    description: "Monitor your entire fleet with live GPS tracking. Know exactly where every vehicle is at any moment.",
+    stats: [
+      { value: "< 1s", label: "Update latency" },
+      { value: "99.9%", label: "Uptime" }
+    ],
+    color: "teal"
+  },
+  {
+    icon: "status",
+    title: "Vehicle Status",
+    description: "Get comprehensive insights into vehicle health, fuel levels, and maintenance schedules.",
+    stats: [
+      { value: "15%", label: "Fuel savings" },
+      { value: "40%", label: "Less downtime" }
+    ],
+    color: "blue"
+  },
+  {
+    icon: "driver",
+    title: "Driver Performance",
+    description: "Track driver behavior, safety scores, and productivity metrics to optimize operations.",
+    stats: [
+      { value: "25%", label: "Safer driving" },
+      { value: "30%", label: "More efficient" }
+    ],
+    color: "cyan"
+  }
+];
+---
+
+<section id="features" class="py-16 lg:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="max-w-3xl mx-auto text-center mb-16">
+      <div class="inline-flex items-center gap-2 bg-teal/10 text-teal px-4 py-2 rounded-full text-sm font-medium mb-6">
+        Features
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-navy text-balance">
+        Everything You Need to Manage Your Fleet
+      </h2>
+      <p class="mt-6 text-lg text-gray-600">
+        Powerful tools designed to give you complete control over your logistics operations.
+      </p>
+    </div>
+
+    <!-- Feature Cards -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {features.map((feature) => (
+        <div class="group relative bg-soft-white rounded-2xl p-8 hover:shadow-xl transition-all duration-300 border border-transparent hover:border-gray-200">
+          <!-- Icon -->
+          <div class={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${
+            feature.color === 'teal' ? 'bg-teal/10' : 
+            feature.color === 'blue' ? 'bg-blue/10' : 'bg-cyan/10'
+          }`}>
+            {feature.icon === 'location' && (
+              <svg class="w-7 h-7 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            )}
+            {feature.icon === 'status' && (
+              <svg class="w-7 h-7 text-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            )}
+            {feature.icon === 'driver' && (
+              <svg class="w-7 h-7 text-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            )}
+          </div>
+
+          <!-- Content -->
+          <h3 class="text-xl font-bold text-navy mb-3">{feature.title}</h3>
+          <p class="text-gray-600 leading-relaxed mb-6">{feature.description}</p>
+
+          <!-- Stats -->
+          <div class="flex gap-6 pt-6 border-t border-gray-200">
+            {feature.stats.map((stat) => (
+              <div>
+                <div class={`text-xl font-bold ${
+                  feature.color === 'teal' ? 'text-teal' : 
+                  feature.color === 'blue' ? 'text-blue' : 'text-cyan'
+                }`}>{stat.value}</div>
+                <div class="text-sm text-gray-500">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+
+          <!-- Hover Arrow -->
+          <div class="absolute top-8 right-8 opacity-0 group-hover:opacity-100 transition-opacity">
+            <svg class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

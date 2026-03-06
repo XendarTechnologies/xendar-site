@@ -4,25 +4,78 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  keywords?: string;
+  canonical?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
 }
 
 const { 
-  title = "Xendar | Smart Logistics Optimization Platform",
-  description = "Optimize fleet operations, monitor deliveries in real time, and improve logistics efficiency with Xendar."
+  title = "Xendar | Optimización logística para empresas de transporte de carga",
+  description = "Xendar optimiza operaciones de transporte de carga con inteligencia de datos: reduce costo por kilómetro, combustible, mantenimiento y kilómetros vacíos.",
+  keywords = "software de logística, software para empresas de transporte, optimización logística, software para transporte de carga, plataforma logística, gestión de flotas de camiones, optimización de transporte de carga, reducción de kilómetros vacíos, optimización de rutas de camiones, software de eficiencia logística, costo por kilómetro transporte, control de combustible flota, mantenimiento predictivo camiones",
+  canonical = "https://xendar.com.ar",
+  ogTitle = "Xendar | Inteligencia logística para transporte de carga",
+  ogDescription = "Plataforma de optimización logística sin hardware para reducir costos y mejorar eficiencia operativa.",
+  ogImage = "https://xendar.com.ar/og-image.jpg",
+  twitterTitle = "Xendar | Optimización logística basada en datos",
+  twitterDescription = "Menos kilómetros vacíos, mejor costo por kilómetro y control total de flota."
 } = Astro.props;
+
+const organizationLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Xendar",
+  url: "https://xendar.com.ar",
+  logo: "https://xendar.com.ar/logo.png",
+  description: "Plataforma de optimización logística para empresas de transporte de carga.",
+  foundingArea: "Argentina",
+  industry: "Logistics Technology",
+  sameAs: []
+};
+
+const softwareLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Xendar",
+  applicationCategory: "LogisticsSoftware",
+  operatingSystem: "Web",
+  description: "Software de optimización logística para flotas y operaciones de transporte de carga.",
+  offers: "SaaS",
+  areaServed: "Latin America"
+};
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Xendar" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={twitterTitle} />
+    <meta name="twitter:description" content={twitterDescription} />
+    <meta name="twitter:image" content={ogImage} />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(organizationLd)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(softwareLd)}></script>
   </head>
   <body class="min-h-screen antialiased">
     <slot />

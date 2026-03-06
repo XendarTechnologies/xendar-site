@@ -1,3 +1,8 @@
+@import "@fontsource/montserrat/400.css";
+@import "@fontsource/montserrat/500.css";
+@import "@fontsource/montserrat/600.css";
+@import "@fontsource/montserrat/700.css";
+@import "@fontsource/montserrat/800.css";
 @import "tailwindcss";
 
 @theme inline {
@@ -11,7 +16,7 @@
   --color-soft-white: oklch(0.96 0.01 180);
 
   /* Typography */
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-sans: 'Montserrat', system-ui, sans-serif;
 }
 
 html {
@@ -21,5 +26,5 @@ html {
 body {
   background-color: #EDF3F3;
   color: #10141C;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Montserrat', system-ui, sans-serif;
 }

@@ -7,11 +7,16 @@
     "dev:poll": "CHOKIDAR_USEPOLLING=1 CHOKIDAR_INTERVAL=100 astro dev --host",
     "build": "astro build",
     "preview": "astro preview",
+    "perf:preview": "npm run build && astro preview --host --port 4322",
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource/montserrat": "^5.2.8",
     "@tailwindcss/vite": "^4.2.1",
     "astro": "^5.17.1",
     "tailwindcss": "^4.2.1"
+  },
+  "devDependencies": {
+    "vite-plugin-compression": "^0.5.1"
   }
 }

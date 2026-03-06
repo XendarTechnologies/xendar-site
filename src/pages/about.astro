@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/NavBar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Sobre Xendar | Experiencia en logística de carga pesada"
+  description="Conocé la historia de Xendar: 40 años de experiencia en transporte y una visión moderna de optimización logística basada en datos."
+  canonical="https://xendar.com.ar/about"
+  ogTitle="Sobre Xendar | Logística nacida en la ruta"
+  ogDescription="Somos especialistas en eficiencia logística que construyeron la herramienta que el sector necesitaba."
+>
+  <Navbar />
+  <main class="pt-28 lg:pt-36 pb-16 lg:pb-24">
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl sm:text-5xl font-bold text-navy leading-tight">
+        Sobre Xendar
+      </h1>
+      <p class="mt-6 text-lg text-gray-600 leading-relaxed">
+        Xendar nació de la combinación entre más de 40 años de experiencia en transporte de carga y la ingeniería moderna de procesos.
+      </p>
+      <p class="mt-4 text-lg text-gray-600 leading-relaxed">
+        No somos una empresa de software que decidió hacer logística. Somos especialistas en eficiencia que construyeron la herramienta que el sector necesitaba.
+      </p>
+      <p class="mt-4 text-lg text-gray-600 leading-relaxed">
+        Nuestra misión es dotar a PYMES y grandes operadores logísticos de la tecnología necesaria para competir en un mercado cada vez más exigente.
+      </p>
+    </section>
+  </main>
+  <Footer />
+</Layout>

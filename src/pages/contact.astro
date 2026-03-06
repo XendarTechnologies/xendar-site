@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/NavBar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Contacto Xendar | Solicitá una demo"
+  description="Contactá a Xendar para conocer la plataforma de optimización logística para transporte de carga en Argentina y Latinoamérica."
+  canonical="https://xendar.com.ar/contact"
+  ogTitle="Contacto Xendar | Solicitar demo"
+  ogDescription="Hablemos de eficiencia logística, reducción de costos operativos y optimización de flotas."
+>
+  <Navbar />
+  <main class="pt-28 lg:pt-36 pb-16 lg:pb-24">
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl sm:text-5xl font-bold text-navy leading-tight">
+        Contacto
+      </h1>
+      <p class="mt-6 text-lg text-gray-600 leading-relaxed">
+        Xendar convierte tu operación logística en un sistema medible, optimizado y controlado.
+      </p>
+
+      <div class="mt-10 grid md:grid-cols-2 gap-6">
+        <article class="bg-white rounded-2xl border border-gray-200 p-6">
+          <h2 class="text-xl font-semibold text-navy">Canales</h2>
+          <ul class="mt-4 space-y-2 text-gray-600">
+            <li>Correo: contacto@xendar.com.ar</li>
+            <li>Teléfono: +54 11 0000 0000</li>
+            <li>Cobertura: Argentina y Latinoamérica</li>
+          </ul>
+        </article>
+        <article class="bg-white rounded-2xl border border-gray-200 p-6">
+          <h2 class="text-xl font-semibold text-navy">Demo estratégica</h2>
+          <p class="mt-4 text-gray-600">
+            Te mostramos cómo pasar de la intuición operativa a decisiones basadas en datos para mejorar márgenes.
+          </p>
+          <a
+            href="mailto:contacto@xendar.com.ar"
+            class="inline-flex mt-6 bg-blue text-white px-5 py-3 rounded-lg font-medium hover:bg-blue-dark transition-colors"
+          >
+            Solicitar demo por correo
+          </a>
+        </article>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

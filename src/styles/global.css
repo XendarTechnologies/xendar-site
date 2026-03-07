@@ -50,7 +50,28 @@ html {
 }
 
 body {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
   background-color: #ffffff;
   color: #0c101c;
   font-family: 'Montserrat', system-ui, sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: min(92vh, 980px);
+  background-image: url('/Background1.png');
+  background-position: center -250px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.54;
+  pointer-events: none;
+  z-index: -1;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%);
 }

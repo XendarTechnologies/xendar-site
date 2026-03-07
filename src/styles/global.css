@@ -64,16 +64,16 @@ body::before {
   top: 0;
   right: 0;
   left: 0;
-  height: min(92vh, 980px);
-  background-image: url('/Background2.png');
-  background-position: center -130px;
+  height: 125vh;
+  background-image: url('/Background1.png');
+  background-position: 72% -300px;
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 0.54;
   pointer-events: none;
   z-index: -1;
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 68%, rgba(0, 0, 0, 0.55) 84%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 68%, rgba(0, 0, 0, 0.55) 84%, transparent 100%);
 }
 
 body.page-about::before {
@@ -85,10 +85,10 @@ body.page-about::before {
 @media (max-width: 768px) {
   body::before {
     height: 125vh;
-    background-position: 62% 20px;
+    background-position: 60% -180px;
     background-size: cover;
-    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
-    mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 74%, rgba(0, 0, 0, 0.5) 88%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 74%, rgba(0, 0, 0, 0.5) 88%, transparent 100%);
   }
 
   body.page-about::before {

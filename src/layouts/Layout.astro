@@ -11,6 +11,7 @@ interface Props {
   ogImage?: string;
   twitterTitle?: string;
   twitterDescription?: string;
+  bodyClass?: string;
 }
 
 const { 
@@ -22,7 +23,8 @@ const {
   ogDescription = "Plataforma de optimización logística sin hardware para reducir costos y mejorar eficiencia operativa.",
   ogImage = "https://xendar.com.ar/og-image.jpg",
   twitterTitle = "Xendar | Optimización logística basada en datos",
-  twitterDescription = "Menos kilómetros vacíos, mejor costo por kilómetro y control total de flota."
+  twitterDescription = "Menos kilómetros vacíos, mejor costo por kilómetro y control total de flota.",
+  bodyClass = ""
 } = Astro.props;
 
 const organizationLd = {
@@ -77,7 +79,7 @@ const softwareLd = {
     <script type="application/ld+json" set:html={JSON.stringify(organizationLd)}></script>
     <script type="application/ld+json" set:html={JSON.stringify(softwareLd)}></script>
   </head>
-  <body class="min-h-screen antialiased">
+  <body class={`min-h-screen antialiased ${bodyClass}`.trim()}>
     <slot />
   </body>
 </html>

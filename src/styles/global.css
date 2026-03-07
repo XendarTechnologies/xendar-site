@@ -65,8 +65,8 @@ body::before {
   right: 0;
   left: 0;
   height: min(92vh, 980px);
-  background-image: url('/Background1.png');
-  background-position: center -250px;
+  background-image: url('/Background2.png');
+  background-position: center -130px;
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 0.54;
@@ -74,4 +74,24 @@ body::before {
   z-index: -1;
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%);
   mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%);
+}
+
+body.page-about::before {
+  background-image: url('/Background2.png');
+  background-position: center -130px;
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  body::before {
+    height: 125vh;
+    background-position: 62% 20px;
+    background-size: cover;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+  }
+
+  body.page-about::before {
+    background-position: 58% 20px;
+  }
 }

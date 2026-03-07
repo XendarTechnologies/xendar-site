@@ -6,14 +6,40 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Xendar Color Palette */
-  --color-navy: oklch(0.15 0.03 260);
-  --color-navy-light: oklch(0.20 0.03 260);
-  --color-blue: oklch(0.45 0.20 265);
-  --color-blue-dark: oklch(0.38 0.18 265);
-  --color-teal: oklch(0.65 0.12 180);
-  --color-cyan: oklch(0.80 0.15 195);
-  --color-soft-white: oklch(0.96 0.01 180);
+  /* XENDAR Palette - Base Tokens */
+  --color-white: #ffffff; /* 55% */
+  --color-platinum: #edf3f3; /* 15% */
+  --color-alice-blue: #e1e6ed; /* 8% */
+  --color-ink-black: #0c101c; /* 6% */
+  --color-text-grey: #617178; /* 6% */
+  --color-oxford-navy: #243b5a; /* 5% */
+  --color-space-indigo: #242b3e; /* 2% */
+  --color-prussian-blue: #002855; /* 1.5% */
+  --color-prussian-blue-dark: #001845; /* 0.5% */
+  --color-tropical-teal: #3bafaf; /* 0.8% */
+  --color-pearl-aqua: #7fc6cc; /* 0.2% */
+
+  /* Semantic Tokens */
+  --color-bg-base: var(--color-white);
+  --color-bg-section: var(--color-platinum);
+  --color-bg-subtle: var(--color-alice-blue);
+  --color-text-primary: var(--color-ink-black);
+  --color-text-secondary: var(--color-text-grey);
+  --color-brand-primary: var(--color-oxford-navy);
+  --color-brand-secondary: var(--color-prussian-blue);
+  --color-brand-tertiary: var(--color-space-indigo);
+  --color-brand-active: var(--color-prussian-blue-dark);
+  --color-accent-primary: var(--color-tropical-teal);
+  --color-accent-secondary: var(--color-pearl-aqua);
+
+  /* Compatibility Aliases (current components) */
+  --color-navy: var(--color-brand-primary);
+  --color-navy-light: var(--color-brand-tertiary);
+  --color-blue: var(--color-brand-secondary);
+  --color-blue-dark: var(--color-brand-active);
+  --color-teal: var(--color-accent-primary);
+  --color-cyan: var(--color-accent-secondary);
+  --color-soft-white: var(--color-bg-section);
 
   /* Typography */
   --font-sans: 'Montserrat', system-ui, sans-serif;
@@ -24,7 +50,7 @@ html {
 }
 
 body {
-  background-color: #EDF3F3;
-  color: #10141C;
+  background-color: #ffffff;
+  color: #0c101c;
   font-family: 'Montserrat', system-ui, sans-serif;
 }

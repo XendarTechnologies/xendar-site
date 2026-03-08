@@ -96,4 +96,14 @@ const navLinks = [
     const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
     mobileMenuBtn.setAttribute('aria-expanded', String(!isExpanded));
   });
+
+  const closeMobileMenu = () => {
+    if (!mobileMenu || !mobileMenuBtn) return;
+    mobileMenu.classList.add('hidden');
+    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+  };
+
+  mobileMenu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeMobileMenu);
+  });
 </script>

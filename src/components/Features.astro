@@ -51,8 +51,12 @@ const features = [
 
     <!-- Feature Cards -->
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {features.map((feature) => (
-        <div class="group relative bg-soft-white rounded-2xl p-8 hover:shadow-xl transition-all duration-300 border border-transparent hover:border-gray-200">
+      {features.map((feature, index) => (
+        <div
+          class="feature-card feature-reveal group relative bg-soft-white rounded-2xl p-8 hover:shadow-xl transition-all duration-300 border border-transparent hover:border-gray-200"
+          style={`--delay:${index * 180}ms;`}
+        >
+          <div class="feature-card-texture" aria-hidden="true"></div>
           <!-- Icon -->
           <div class={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${
             feature.color === 'teal' ? 'bg-teal/10' : 
@@ -104,3 +108,72 @@ const features = [
     </div>
   </div>
 </section>
+
+<style>
+  .feature-card {
+    overflow: hidden;
+    backdrop-filter: blur(2px);
+  }
+
+  .feature-card-texture {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background:
+      radial-gradient(120% 80% at 0% 0%, rgba(127, 198, 204, 0.14) 0%, rgba(127, 198, 204, 0) 60%),
+      radial-gradient(90% 70% at 100% 100%, rgba(36, 59, 90, 0.08) 0%, rgba(36, 59, 90, 0) 65%),
+      repeating-linear-gradient(
+        -24deg,
+        rgba(225, 230, 237, 0.2) 0px,
+        rgba(225, 230, 237, 0.2) 1px,
+        transparent 1px,
+        transparent 16px
+      );
+    opacity: 0.8;
+  }
+
+  .feature-reveal {
+    opacity: 0;
+    transform: translateY(34px) scale(0.98);
+    transition:
+      opacity 900ms ease,
+      transform 900ms ease;
+    transition-delay: var(--delay, 0ms);
+  }
+
+  .feature-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .feature-reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const cards = Array.from(document.querySelectorAll('.feature-reveal'));
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (prefersReducedMotion) {
+    cards.forEach((card) => card.classList.add('is-visible'));
+  } else if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          entry.target.classList.toggle('is-visible', entry.isIntersecting);
+        });
+      },
+      { threshold: 0.32, rootMargin: '0px 0px -6% 0px' }
+    );
+
+    cards.forEach((card) => observer.observe(card));
+  } else {
+    cards.forEach((card) => card.classList.add('is-visible'));
+  }
+</script>

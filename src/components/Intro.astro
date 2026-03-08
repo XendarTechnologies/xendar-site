@@ -2,43 +2,76 @@
 
 ---
 
-<section id="intro" class="relative z-10 -mt-px py-16 lg:py-24 bg-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="max-w-3xl mx-auto text-center">
-      <h2
-        data-scroll-fill
-        class="scroll-fill-title max-w-4xl mx-auto text-3xl sm:text-4xl lg:text-5xl font-bold text-center leading-tight"
+<section id="intro" class="relative z-10 -mt-px py-16 lg:py-24 bg-white overflow-hidden">
+  <div class="intro-video-layer pointer-events-none absolute hidden lg:block z-0">
+    <div
+      class="intro-video-fade absolute inset-0"
+      style="mask-image: linear-gradient(to left, #000 62%, transparent 100%), linear-gradient(to top, #000 76%, transparent 100%); -webkit-mask-image: linear-gradient(to left, #000 62%, transparent 100%), linear-gradient(to top, #000 76%, transparent 100%);"
+    >
+      <video
+        class="h-full w-full object-contain opacity-72"
+        style="object-position: right bottom;"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
       >
-        <span class="scroll-fill-line">
-          <span class="scroll-fill-word">Cada</span>
-          <span class="scroll-fill-word">camión</span>
-          <span class="scroll-fill-word">genera</span>
-          <span class="scroll-fill-word">datos.</span>
-        </span>
-        <span class="scroll-fill-line">
-          <span class="scroll-fill-word">Xendar</span>
-          <span class="scroll-fill-word">los</span>
-          <span class="scroll-fill-word">convierte</span>
-          <span class="scroll-fill-word">en</span>
-          <span class="scroll-fill-word">ahorro</span>
-          <span class="scroll-fill-word">real.</span>
-        </span>
-      </h2>
-      <p class="mt-6 text-lg text-gray-600 leading-relaxed">
-        Analizamos los viajes de tu flota para detectar: kilómetros en vacío, desvíos innecesarios,
-        consumo de combustible y eficiencia de cada ruta.
-        <br />
-        Todo sin instalar hardware nuevo, a través de los datos GPS del celular del conductor y
-        algoritmos avanzados.
-      </p>
+        <source src="/video-intro.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="relative z-10 max-w-3xl text-center lg:text-left">
+        <h2
+          data-scroll-fill
+          class="scroll-fill-title max-w-4xl mx-auto lg:mx-0 text-3xl sm:text-4xl lg:text-5xl font-bold text-center lg:text-left leading-tight"
+        >
+          <span class="scroll-fill-line">
+            <span class="scroll-fill-word">Cada</span>
+            <span class="scroll-fill-word">camión</span>
+            <span class="scroll-fill-word">genera</span>
+            <span class="scroll-fill-word">datos.</span>
+          </span>
+          <span class="scroll-fill-line">
+            <span class="scroll-fill-word">Xendar</span>
+            <span class="scroll-fill-word">los</span>
+            <span class="scroll-fill-word">convierte</span>
+            <span class="scroll-fill-word">en</span>
+            <span class="scroll-fill-word">ahorro</span>
+            <span class="scroll-fill-word">real.</span>
+          </span>
+        </h2>
+        <p class="mt-6 text-lg text-gray-600 leading-relaxed">
+          Analizamos los viajes de tu flota para detectar: kilómetros en vacío, desvíos innecesarios,
+          consumo de combustible y eficiencia de cada ruta.
+          <br />
+          Todo sin instalar hardware nuevo, a través de los datos GPS del celular del conductor y
+          algoritmos avanzados.
+        </p>
+
+        <div class="mt-8 lg:hidden w-full max-w-md mx-auto">
+          <video
+            class="intro-mobile-video w-full h-auto object-contain opacity-72"
+            style="object-position: center bottom;"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          >
+            <source src="/video-intro.mp4" type="video/mp4" />
+          </video>
+        </div>
     </div>
 
     <!-- Trusted By -->
-    <div class="mt-16">
-      <p class="text-center text-sm font-bold text-gray-500 tracking-wider mb-8">
+    <div class="mt-16 max-w-3xl mx-auto lg:mx-0">
+      <p class="text-center lg:text-left text-sm font-bold text-gray-500 tracking-wider mb-8">
         Diseñado para operaciones de carga pesada con foco en margen por kilómetro.
       </p>
-      <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 opacity-60">
+      <div class="flex flex-wrap items-center justify-center lg:justify-start gap-x-12 gap-y-8 opacity-60">
         <div class="text-2xl font-bold text-gray-400">Flotas propias</div>
         <div class="text-2xl font-bold text-gray-400">Operadores regionales</div>
         <div class="text-2xl font-bold text-gray-400">PYMES en crecimiento</div>
@@ -48,6 +81,20 @@
 </section>
 
 <style>
+  .intro-video-layer {
+    top: 0.7rem;
+    bottom: 0.2rem;
+    right: clamp(170px, 10vw, 280px);
+    width: clamp(980px, 70vw, 1320px);
+  }
+
+  .intro-video-fade {
+    mask-image: linear-gradient(to left, #000 62%, transparent 100%),
+      linear-gradient(to top, #000 76%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to left, #000 62%, transparent 100%),
+      linear-gradient(to top, #000 76%, transparent 100%);
+  }
+
   .scroll-fill-line {
     display: block;
   }
@@ -67,6 +114,21 @@
     .scroll-fill-word {
       color: var(--color-navy, #243b5a) !important;
       transition: none;
+    }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1280px) {
+    .intro-video-layer {
+      right: clamp(95px, 6vw, 180px);
+      width: clamp(760px, 64vw, 1080px);
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .intro-mobile-video {
+      transform: translateX(-35%);
+      width: 130%;
+      max-width: none;
     }
   }
 </style>

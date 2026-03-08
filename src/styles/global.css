@@ -72,14 +72,20 @@ body::before {
   opacity: 0.54;
   pointer-events: none;
   z-index: -1;
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 68%, rgba(0, 0, 0, 0.55) 84%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 68%, rgba(0, 0, 0, 0.55) 84%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
 }
 
 body.page-about::before {
   background-image: url('/Background2.png');
   background-position: center -130px;
   opacity: 0.5;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  body::before {
+    background-position: 72% -460px;
+  }
 }
 
 @media (max-width: 768px) {

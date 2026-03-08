@@ -5,10 +5,24 @@
 <section id="intro" class="relative z-10 -mt-px py-16 lg:py-24 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="max-w-3xl mx-auto text-center">
-      <h2 class="max-w-4xl mx-auto text-3xl sm:text-4xl lg:text-5xl font-bold text-navy text-center leading-tight">
-        Cada camión genera datos.
-        <br />
-        Xendar los convierte en ahorro real.
+      <h2
+        data-scroll-fill
+        class="scroll-fill-title max-w-4xl mx-auto text-3xl sm:text-4xl lg:text-5xl font-bold text-center leading-tight"
+      >
+        <span class="scroll-fill-line">
+          <span class="scroll-fill-word">Cada</span>
+          <span class="scroll-fill-word">camión</span>
+          <span class="scroll-fill-word">genera</span>
+          <span class="scroll-fill-word">datos.</span>
+        </span>
+        <span class="scroll-fill-line">
+          <span class="scroll-fill-word">Xendar</span>
+          <span class="scroll-fill-word">los</span>
+          <span class="scroll-fill-word">convierte</span>
+          <span class="scroll-fill-word">en</span>
+          <span class="scroll-fill-word">ahorro</span>
+          <span class="scroll-fill-word">real.</span>
+        </span>
       </h2>
       <p class="mt-6 text-lg text-gray-600 leading-relaxed">
         Analizamos los viajes de tu flota para detectar: kilómetros en vacío, desvíos innecesarios,
@@ -32,3 +46,69 @@
     </div>
   </div>
 </section>
+
+<style>
+  .scroll-fill-line {
+    display: block;
+  }
+
+  .scroll-fill-word {
+    display: inline-block;
+    margin-right: 0.22em;
+    color: #9ca9b6;
+    transition: color 180ms ease;
+  }
+
+  .scroll-fill-word.is-filled {
+    color: var(--color-navy, #243b5a);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-fill-word {
+      color: var(--color-navy, #243b5a) !important;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const title = document.querySelector('[data-scroll-fill]');
+
+  if (title instanceof HTMLElement) {
+    const words = Array.from(title.querySelectorAll('.scroll-fill-word'));
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    if (reduceMotion.matches) {
+      words.forEach((word) => word.classList.add('is-filled'));
+    } else {
+      let ticking = false;
+
+      const updateProgress = () => {
+        ticking = false;
+        const rect = title.getBoundingClientRect();
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+
+        const start = vh * 0.88;
+        const end = vh * 0.28;
+        const raw = (start - rect.top) / (start - end);
+        const progress = Math.max(0, Math.min(1, raw));
+        const activeWords = Math.floor(progress * words.length);
+
+        words.forEach((word, index) => {
+          word.classList.toggle('is-filled', index < activeWords);
+        });
+      };
+
+      const requestUpdate = () => {
+        if (!ticking) {
+          ticking = true;
+          window.requestAnimationFrame(updateProgress);
+        }
+      };
+
+      window.addEventListener('scroll', requestUpdate, { passive: true });
+      window.addEventListener('resize', requestUpdate);
+      updateProgress();
+    }
+  }
+</script>

@@ -1,5 +1,5 @@
 ---
-
+const mapImageUrl = '/mapa-nocturno.png';
 ---
 
 <section id="solutions" class="py-16 lg:py-24 bg-soft-white">
@@ -25,45 +25,13 @@
           </div>
 
           <!-- Map Content -->
-          <div class="relative h-[350px] lg:h-[420px] bg-navy-light">
+          <div class="h-[350px] lg:h-[420px]">
             <img
-              src="/mapa-nocturno.png"
-              alt="Mapa nocturno de operación"
-              class="absolute inset-0 w-full h-full object-cover"
+              src={mapImageUrl}
+              class="w-full h-full object-cover object-center"
               loading="lazy"
               decoding="async"
             />
-            <svg class="absolute inset-0 w-full h-full" viewBox="0 0 500 400" preserveAspectRatio="xMidYMid slice">
-              <defs>
-                <linearGradient id="routeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#3BAFAF"/>
-                  <stop offset="100%" stop-color="#3EDFF3"/>
-                </linearGradient>
-              </defs>
-
-              <!-- Active Routes -->
-              <!-- Ruta principal: izquierda media -> centro -> derecha baja -->
-              <path d="M 140 256 Q 198 266 266 260 T 414 304" fill="none" stroke="url(#routeGradient)" stroke-width="3.6" stroke-linecap="round">
-                <animate attributeName="stroke-dasharray" values="0,1000;1000,0" dur="3.4s" repeatCount="indefinite"/>
-              </path>
-
-              <!-- Ruta secundaria: superior -> derecha media -->
-              <path d="M 236 114 Q 305 146 387 193" fill="none" stroke="#3BAFAF" stroke-width="2.9" stroke-linecap="round" stroke-dasharray="10 5">
-                <animate attributeName="stroke-dashoffset" values="0;-120" dur="2.8s" repeatCount="indefinite"/>
-              </path>
-
-              <!-- Conexión vertical: superior -> centro bajo -->
-              <path d="M 236 114 Q 236 184 266 260" fill="none" stroke="#3EDFF3" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="7 6" opacity="0.95">
-                <animate attributeName="stroke-dashoffset" values="0;-90" dur="2.4s" repeatCount="indefinite"/>
-              </path>
-
-              <!-- Nodos de brillo alineados a los frentes de camión -->
-              <circle cx="236" cy="114" r="4.2" fill="#3EDFF3" opacity="0.9" />
-              <circle cx="387" cy="193" r="4.2" fill="#3EDFF3" opacity="0.9" />
-              <circle cx="140" cy="256" r="4.2" fill="#3EDFF3" opacity="0.9" />
-              <circle cx="266" cy="260" r="4.2" fill="#3EDFF3" opacity="0.9" />
-              <circle cx="414" cy="304" r="4.2" fill="#3EDFF3" opacity="0.9" />
-            </svg>
           </div>
 
           <!-- Map Footer Stats -->

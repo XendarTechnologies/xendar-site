@@ -133,10 +133,14 @@ export const POST: APIRoute = async ({ request }) => {
     const fromEmail = import.meta.env.CONTACT_FROM_EMAIL;
     const toEmail = import.meta.env.CONTACT_TO_EMAIL ?? 'contacto@xendar.com.ar';
 
-    if (!resendApiKey || !fromEmail) {
+    const missing: string[] = [];
+    if (!resendApiKey) missing.push('RESEND_API_KEY');
+    if (!fromEmail) missing.push('CONTACT_FROM_EMAIL');
+
+    if (missing.length > 0) {
       return new Response(
         JSON.stringify({
-          error: 'El formulario no está configurado todavía en el servidor (faltan variables de correo).',
+          error: `Falta configuración del servidor: ${missing.join(', ')}`,
         }),
         { status: 503, headers: { 'content-type': 'application/json; charset=utf-8' } }
       );

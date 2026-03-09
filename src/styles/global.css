@@ -127,7 +127,7 @@ body {
   font-family: 'Montserrat', system-ui, sans-serif;
 }
 
-body::before {
+body.page-home::before {
   content: "";
   position: fixed;
   top: 0;
@@ -135,7 +135,7 @@ body::before {
   left: 0;
   height: 145vh;
   background-image: url('/Background1.png');
-  background-position: 72% -300px;
+  background-position: 20% -400px;
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 0.54;
@@ -159,7 +159,7 @@ body::before {
   );
 }
 
-body::after {
+body.page-home::after {
   content: "";
   position: fixed;
   left: 0;
@@ -169,7 +169,7 @@ body::after {
   background: linear-gradient(
     to bottom,
     rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.55) 52%,
+    rgba(255, 255, 255, 0.55) 90%,
     rgba(255, 255, 255, 0.9) 76%,
     #ffffff 100%
   );
@@ -178,19 +178,91 @@ body::after {
 }
 
 body.page-about::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: -1;
   background-image: url('/Background2.png');
+  background-repeat: no-repeat;
+  background-size: cover;
   background-position: center -130px;
   opacity: 0.70;
+  height: 165vh;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 94%,
+    rgba(0, 0, 0, 0.9) 98%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 94%,
+    rgba(0, 0, 0, 0.9) 98%,
+    transparent 100%
+  );
+}
+
+body.page-about::after {
+  display: none;
+}
+
+body.page-contact::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: -1;
+  background-image: url('/Background1.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 180vh;
+  opacity: 0.34;
+  background-position: 100% -500px;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 90%,
+    rgba(0, 0, 0, 0.75) 96%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 90%,
+    rgba(0, 0, 0, 0.75) 96%,
+    transparent 100%
+  );
+}
+
+body.page-contact::after {
+  display: none;
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  body::before {
+  body.page-home::before {
     background-position: 72% -460px;
+  }
+
+  body.page-about::before {
+    background-position: 58% -40px;
+    height: 160vh;
+  }
+
+  body.page-contact::before {
+    background-position: 74% -220px;
+    height: 110vh;
   }
 }
 
 @media (max-width: 768px) {
-  body::before {
+  body.page-home::before {
     height: 140vh;
     background-position: 60% -180px;
     background-size: cover;
@@ -199,10 +271,18 @@ body.page-about::before {
   }
 
   body.page-about::before {
+    height: 150vh;
     background-position: 58% 20px;
   }
 
-  body::after {
+  body.page-contact::before {
+    height: 110vh;
+    background-position: 64% -120px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 88%, rgba(0, 0, 0, 0.7) 96%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 88%, rgba(0, 0, 0, 0.7) 96%, transparent 100%);
+  }
+
+  body.page-home::after {
     height: 46vh;
     background: linear-gradient(
       to bottom,

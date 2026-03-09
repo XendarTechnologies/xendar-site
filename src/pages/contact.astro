@@ -10,6 +10,7 @@ import Footer from '../components/Footer.astro';
   canonical="https://xendar.com.ar/contact"
   ogTitle="Contacto Xendar | Solicitar demo"
   ogDescription="Hablemos de eficiencia logística, reducción de costos operativos y optimización de flotas."
+  bodyClass="page-contact"
 >
   <Navbar />
   <main class="pt-24 lg:pt-32 pb-14 lg:pb-20">
@@ -42,7 +43,7 @@ import Footer from '../components/Footer.astro';
 
           <div class="mt-10 space-y-2 text-sm text-navy/85">
             <p><strong>Correo:</strong> contacto@xendar.com.ar</p>
-            <p><strong>Teléfono:</strong> +54 11 0000 0000</p>
+            <p><strong>Teléfono:</strong> +54 3364 11 3181</p>
             <p><strong>Cobertura:</strong> Argentina y Latinoamérica</p>
           </div>
         </article>
@@ -122,27 +123,28 @@ import Footer from '../components/Footer.astro';
   .contact-panel-left {
     position: relative;
     isolation: isolate;
+    overflow: hidden;
     background-color: #edf3f3;
-  }
-
-  .contact-panel-left::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -2;
-    background-image: url('/Background2.png');
-    background-size: cover;
-    background-position: center;
-    opacity: 0.54;
+    background-image:
+      linear-gradient(125deg, rgba(237, 243, 243, 0.86) 0%, rgba(237, 243, 243, 0.78) 42%, rgba(237, 243, 243, 0.84) 100%),
+      url('/Background2.png');
+    background-size: cover, cover;
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
   }
 
   .contact-panel-left::after {
     content: "";
     position: absolute;
     inset: 0;
-    z-index: -1;
-    background:
-      linear-gradient(125deg, rgba(237, 243, 243, 0.96) 0%, rgba(237, 243, 243, 0.82) 42%, rgba(237, 243, 243, 0.9) 100%);
+    z-index: 0;
+    background: rgba(237, 243, 243, 0.42);
+    pointer-events: none;
+  }
+
+  .contact-panel-left > * {
+    position: relative;
+    z-index: 1;
   }
 
   @media (min-width: 1024px) {

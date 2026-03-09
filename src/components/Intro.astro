@@ -6,7 +6,7 @@
   <div class="intro-video-layer pointer-events-none absolute hidden lg:block z-0">
     <div class="intro-video-fade absolute inset-0">
       <video
-        class="h-full w-full object-contain opacity-72"
+        class="intro-video-el h-full w-full object-contain opacity-72"
         style="object-position: right bottom;"
         autoplay
         muted
@@ -36,7 +36,7 @@
 
         <div class="mt-8 lg:hidden w-full max-w-md mx-auto">
           <video
-            class="intro-mobile-video w-full h-auto object-contain opacity-72"
+            class="intro-video-el intro-mobile-video w-full h-auto object-contain opacity-72"
             style="object-position: center bottom;"
             autoplay
             muted
@@ -171,7 +171,7 @@
 
 	  @media (min-width: 1821px) {
     .intro-video-layer {
-      right: -100px;
+      right: -150px;
       width: 1320px;
     }
   }
@@ -325,3 +325,34 @@
     }
   }
 </style>
+
+<script>
+  const setupIntroVideoPlayback = () => {
+    const videos = Array.from(document.querySelectorAll('.intro-video-el'));
+    if (!videos.length) return;
+
+    videos.forEach((video) => {
+      if (!(video instanceof HTMLVideoElement)) return;
+      video.muted = true;
+      video.playsInline = true;
+      video.loop = true;
+      video.setAttribute('muted', '');
+      video.setAttribute('playsinline', '');
+      video.load();
+      video.play().catch(() => {});
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupIntroVideoPlayback, { once: true });
+  } else {
+    setupIntroVideoPlayback();
+  }
+
+  document.addEventListener('astro:page-load', setupIntroVideoPlayback);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      setupIntroVideoPlayback();
+    }
+  });
+</script>

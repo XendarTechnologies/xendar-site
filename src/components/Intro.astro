@@ -71,10 +71,15 @@
       <p class="text-center lg:text-left text-sm font-bold text-gray-500 tracking-wider mb-8">
         Diseñado para operaciones de carga pesada con foco en margen por kilómetro.
       </p>
-      <div class="flex flex-wrap items-center justify-center lg:justify-start gap-x-12 gap-y-8 opacity-60">
-        <div class="text-2xl font-bold text-gray-400">Flotas propias</div>
-        <div class="text-2xl font-bold text-gray-400">Operadores regionales</div>
-        <div class="text-2xl font-bold text-gray-400">PYMES en crecimiento</div>
+      <div class="intro-ticker opacity-65">
+        <div class="intro-ticker-track">
+          <span class="intro-ticker-item">Flotas propias</span>
+          <span class="intro-ticker-item">Operadores regionales</span>
+          <span class="intro-ticker-item">PYMES en crecimiento</span>
+          <span class="intro-ticker-item" aria-hidden="true">Flotas propias</span>
+          <span class="intro-ticker-item" aria-hidden="true">Operadores regionales</span>
+          <span class="intro-ticker-item" aria-hidden="true">PYMES en crecimiento</span>
+        </div>
       </div>
     </div>
   </div>
@@ -108,6 +113,48 @@
 
   .scroll-fill-word.is-filled {
     color: var(--color-navy, #243b5a);
+  }
+
+  .intro-ticker {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+  }
+
+  .intro-ticker-track {
+    display: inline-flex;
+    align-items: center;
+    gap: 2.4rem;
+    min-width: max-content;
+    white-space: nowrap;
+    animation: introTicker 16s linear infinite;
+  }
+
+  .intro-ticker-item {
+    font-size: 2rem;
+    line-height: 1.1;
+    font-weight: 700;
+    color: #9ca9b6;
+  }
+
+  .intro-ticker-item::after {
+    content: "•";
+    margin-left: 2.4rem;
+    color: #c1c9d4;
+  }
+
+  .intro-ticker-item:last-child::after {
+    content: "";
+    margin-left: 0;
+  }
+
+  @keyframes introTicker {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -158,6 +205,16 @@
       transform: translateX(-15%);
       width: 130%;
       max-width: none;
+    }
+
+    .intro-ticker-item {
+      font-size: 1.6rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .intro-ticker-track {
+      animation: none;
     }
   }
 </style>

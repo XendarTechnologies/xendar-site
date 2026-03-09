@@ -12,9 +12,59 @@ const escapeHtml = (value: string) =>
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const formData = await request.formData();
+    const contentType = request.headers.get('content-type') ?? '';
 
-    const website = String(formData.get('website') ?? '').trim();
+    let nombre = '';
+    let correo = '';
+    let empresa = '';
+    let mensaje = '';
+    let website = '';
+
+    if (
+      contentType.includes('multipart/form-data') ||
+      contentType.includes('application/x-www-form-urlencoded')
+    ) {
+      const formData = await request.formData();
+      website = String(formData.get('website') ?? '').trim();
+      nombre = String(formData.get('nombre') ?? '').trim();
+      correo = String(formData.get('correo') ?? '').trim();
+      empresa = String(formData.get('empresa') ?? '').trim();
+      mensaje = String(formData.get('mensaje') ?? '').trim();
+    } else if (contentType.includes('application/json')) {
+      const body = (await request.json()) as Record<string, unknown>;
+      website = String(body.website ?? '').trim();
+      nombre = String(body.nombre ?? '').trim();
+      correo = String(body.correo ?? '').trim();
+      empresa = String(body.empresa ?? '').trim();
+      mensaje = String(body.mensaje ?? '').trim();
+    } else {
+      // Fallback robusto para text/plain u otros tipos inesperados.
+      const raw = await request.text();
+      const params = new URLSearchParams(raw);
+
+      if (params.size > 0) {
+        website = String(params.get('website') ?? '').trim();
+        nombre = String(params.get('nombre') ?? '').trim();
+        correo = String(params.get('correo') ?? '').trim();
+        empresa = String(params.get('empresa') ?? '').trim();
+        mensaje = String(params.get('mensaje') ?? '').trim();
+      } else {
+        // Intenta formato "clave: valor" por línea
+        const lines = raw.split(/\r?\n/);
+        const dict: Record<string, string> = {};
+        for (const line of lines) {
+          const [key, ...rest] = line.split(':');
+          if (!key || rest.length === 0) continue;
+          dict[key.trim().toLowerCase()] = rest.join(':').trim();
+        }
+        website = dict.website ?? '';
+        nombre = dict.nombre ?? '';
+        correo = dict.correo ?? '';
+        empresa = dict.empresa ?? '';
+        mensaje = dict.mensaje ?? '';
+      }
+    }
+
     if (website) {
       // Honeypot anti-spam: respond as success to avoid bot feedback.
       return new Response(JSON.stringify({ ok: true }), {
@@ -22,11 +72,6 @@ export const POST: APIRoute = async ({ request }) => {
         headers: { 'content-type': 'application/json; charset=utf-8' },
       });
     }
-
-    const nombre = String(formData.get('nombre') ?? '').trim();
-    const correo = String(formData.get('correo') ?? '').trim();
-    const empresa = String(formData.get('empresa') ?? '').trim();
-    const mensaje = String(formData.get('mensaje') ?? '').trim();
 
     if (!nombre || !correo || !mensaje) {
       return new Response(

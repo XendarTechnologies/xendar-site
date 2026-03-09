@@ -53,7 +53,7 @@ const features = [
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
       {features.map((feature, index) => (
         <div
-          class="feature-card feature-reveal group relative bg-soft-white rounded-2xl p-8 hover:shadow-xl transition-all duration-300 border border-transparent hover:border-gray-200"
+          class="feature-card feature-reveal group relative h-full flex flex-col bg-soft-white rounded-2xl p-8 hover:shadow-xl transition-all duration-300 border border-transparent hover:border-gray-200"
           style={`--delay:${index * 180}ms;`}
         >
           <div class="feature-card-texture" aria-hidden="true"></div>
@@ -85,7 +85,7 @@ const features = [
           <p class="text-gray-600 leading-relaxed mb-6">{feature.description}</p>
 
           <!-- Stats -->
-          <div class="flex gap-6 pt-6 border-t border-gray-200">
+          <div class="mt-auto flex gap-6 pt-6 border-t border-gray-200">
             {feature.stats.map((stat) => (
               <div>
                 <div class={`text-xl font-bold ${
@@ -157,23 +157,41 @@ const features = [
 </style>
 
 <script>
-  const cards = Array.from(document.querySelectorAll('.feature-reveal'));
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const setupFeatureReveal = () => {
+    const cards = Array.from(document.querySelectorAll('.feature-reveal'));
+    if (!cards.length) return;
 
-  if (prefersReducedMotion) {
-    cards.forEach((card) => card.classList.add('is-visible'));
-  } else if ('IntersectionObserver' in window) {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isFeaturesHash = window.location.hash === '#features';
+
+    if (prefersReducedMotion || isFeaturesHash || !('IntersectionObserver' in window)) {
+      cards.forEach((card) => card.classList.add('is-visible'));
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           entry.target.classList.toggle('is-visible', entry.isIntersecting);
         });
       },
-      { threshold: 0.32, rootMargin: '0px 0px -6% 0px' }
+      { threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
     );
 
     cards.forEach((card) => observer.observe(card));
+
+    window.addEventListener('hashchange', () => {
+      if (window.location.hash === '#features') {
+        cards.forEach((card) => card.classList.add('is-visible'));
+      }
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupFeatureReveal, { once: true });
   } else {
-    cards.forEach((card) => card.classList.add('is-visible'));
+    setupFeatureReveal();
   }
+
+  document.addEventListener('astro:page-load', setupFeatureReveal);
 </script>

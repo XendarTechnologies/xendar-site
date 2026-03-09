@@ -12,38 +12,142 @@ import Footer from '../components/Footer.astro';
   ogDescription="Hablemos de eficiencia logística, reducción de costos operativos y optimización de flotas."
 >
   <Navbar />
-  <main class="pt-28 lg:pt-36 pb-16 lg:pb-24">
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-4xl sm:text-5xl font-bold text-navy leading-tight">
-        Contacto
-      </h1>
-      <p class="mt-6 text-lg text-gray-600 leading-relaxed">
-        Xendar convierte tu operación logística en un sistema medible, optimizado y controlado.
-      </p>
-
-      <div class="mt-10 grid md:grid-cols-2 gap-6">
-        <article class="bg-white rounded-2xl border border-gray-200 p-6">
-          <h2 class="text-xl font-semibold text-navy">Canales</h2>
-          <ul class="mt-4 space-y-2 text-gray-600">
-            <li>Correo: contacto@xendar.com.ar</li>
-            <li>Teléfono: +54 11 0000 0000</li>
-            <li>Cobertura: Argentina y Latinoamérica</li>
-          </ul>
-        </article>
-        <article class="bg-white rounded-2xl border border-gray-200 p-6">
-          <h2 class="text-xl font-semibold text-navy">Demo estratégica</h2>
-          <p class="mt-4 text-gray-600">
-            Te mostramos cómo pasar de la intuición operativa a decisiones basadas en datos para mejorar márgenes.
+  <main class="pt-24 lg:pt-32 pb-14 lg:pb-20">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="contact-split rounded-3xl overflow-hidden border border-alice-blue/80 shadow-[0_18px_40px_rgba(36,59,90,0.08)]">
+        <article class="contact-panel contact-panel-left p-8 sm:p-10 lg:p-14">
+          <h1 class="text-4xl sm:text-5xl font-bold text-navy leading-tight">Contáctanos</h1>
+          <p class="mt-6 text-xl text-ink-black font-semibold leading-snug max-w-xl">
+            ¿Tenés dudas sobre Xendar? Escribinos y te respondemos para evaluar tu operación.
           </p>
-          <a
-            href="mailto:contacto@xendar.com.ar"
-            class="inline-flex mt-6 bg-blue text-white px-5 py-3 rounded-lg font-medium hover:bg-blue-dark transition-colors"
-          >
-            Solicitar demo por correo
-          </a>
+
+          <ul class="mt-10 space-y-4 text-navy">
+            <li class="flex items-start gap-3">
+              <span class="mt-2 h-1.5 w-1.5 rounded-full bg-teal"></span>
+              <span>Detectá en qué viajes se pierde margen operativo.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-2 h-1.5 w-1.5 rounded-full bg-teal"></span>
+              <span>Implementación simple: sin hardware adicional.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-2 h-1.5 w-1.5 rounded-full bg-teal"></span>
+              <span>Controlá documentación, eventos y trazabilidad en un solo flujo.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-2 h-1.5 w-1.5 rounded-full bg-teal"></span>
+              <span>Soporte estratégico para operadores de carga pesada.</span>
+            </li>
+          </ul>
+
+          <div class="mt-10 space-y-2 text-sm text-navy/85">
+            <p><strong>Correo:</strong> contacto@xendar.com.ar</p>
+            <p><strong>Teléfono:</strong> +54 11 0000 0000</p>
+            <p><strong>Cobertura:</strong> Argentina y Latinoamérica</p>
+          </div>
+        </article>
+
+        <article class="contact-panel bg-white p-8 sm:p-10 lg:p-14">
+          <h2 class="text-3xl font-bold text-navy">Enviar mensaje</h2>
+
+          <form class="mt-8 space-y-6" action="mailto:contacto@xendar.com.ar" method="post" enctype="text/plain">
+            <div>
+              <label for="nombre" class="block text-sm font-semibold text-navy mb-2">Nombre</label>
+              <input
+                id="nombre"
+                name="nombre"
+                type="text"
+                required
+                class="w-full rounded-xl border border-alice-blue bg-white px-4 py-3 text-navy outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/15"
+              />
+            </div>
+
+            <div>
+              <label for="correo" class="block text-sm font-semibold text-navy mb-2">Correo electrónico</label>
+              <input
+                id="correo"
+                name="correo"
+                type="email"
+                required
+                class="w-full rounded-xl border border-alice-blue bg-white px-4 py-3 text-navy outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/15"
+              />
+            </div>
+
+            <div>
+              <label for="empresa" class="block text-sm font-semibold text-navy mb-2">Empresa</label>
+              <input
+                id="empresa"
+                name="empresa"
+                type="text"
+                class="w-full rounded-xl border border-alice-blue bg-white px-4 py-3 text-navy outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/15"
+              />
+            </div>
+
+            <div>
+              <label for="mensaje" class="block text-sm font-semibold text-navy mb-2">Mensaje</label>
+              <textarea
+                id="mensaje"
+                name="mensaje"
+                rows="5"
+                required
+                class="w-full resize-y rounded-xl border border-alice-blue bg-white px-4 py-3 text-navy outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/15"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full rounded-xl bg-blue py-3.5 font-semibold text-white transition hover:bg-blue-dark"
+            >
+              Enviar mensaje
+            </button>
+          </form>
         </article>
       </div>
     </section>
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .contact-split {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: #ffffff;
+  }
+
+  .contact-panel {
+    min-height: 540px;
+  }
+
+  .contact-panel-left {
+    position: relative;
+    isolation: isolate;
+    background-color: #edf3f3;
+  }
+
+  .contact-panel-left::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-image: url('/Background2.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.54;
+  }
+
+  .contact-panel-left::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(125deg, rgba(237, 243, 243, 0.96) 0%, rgba(237, 243, 243, 0.82) 42%, rgba(237, 243, 243, 0.9) 100%);
+  }
+
+  @media (min-width: 1024px) {
+    .contact-split {
+      grid-template-columns: 1.04fr 0.96fr;
+    }
+  }
+</style>

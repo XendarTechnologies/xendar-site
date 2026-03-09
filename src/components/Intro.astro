@@ -2,7 +2,7 @@
 
 ---
 
-<section id="intro" class="relative z-10 py-16 lg:py-24 bg-white overflow-hidden">
+<section id="intro" class="relative z-10 py-16 lg:py-24 lg:h-200 bg-white overflow-hidden">
   <div class="intro-video-layer pointer-events-none absolute hidden lg:block z-0">
     <div class="intro-video-fade absolute inset-0">
       <video
@@ -20,7 +20,8 @@
   </div>
 
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="intro-copy-panel relative z-10 max-w-3xl text-center lg:text-left">
+    <div class="intro-text-content">
+      <div class="intro-copy-panel relative z-10 max-w-3xl text-center lg:text-left">
         <h2
           data-scroll-fill
           class="scroll-fill-title max-w-4xl mx-auto lg:mx-0 text-3xl sm:text-4xl lg:text-5xl font-bold text-center lg:text-left leading-tight"
@@ -61,21 +62,28 @@
             <source src="/video-intro.mp4" type="video/mp4" />
           </video>
         </div>
-    </div>
+      </div>
 
-    <!-- Trusted By -->
-    <div class="mt-16 max-w-3xl mx-auto lg:mx-0">
-      <p class="text-center lg:text-left text-sm font-bold text-gray-500 tracking-wider mb-8">
-        Diseñado para operaciones de carga pesada con foco en margen por kilómetro.
-      </p>
-      <div class="intro-ticker opacity-65">
-        <div class="intro-ticker-track">
-          <span class="intro-ticker-item">Flotas propias</span>
-          <span class="intro-ticker-item">Operadores regionales</span>
-          <span class="intro-ticker-item">PYMES en crecimiento</span>
-          <span class="intro-ticker-item" aria-hidden="true">Flotas propias</span>
-          <span class="intro-ticker-item" aria-hidden="true">Operadores regionales</span>
-          <span class="intro-ticker-item" aria-hidden="true">PYMES en crecimiento</span>
+      <div class="mt-6 lg:mt-7 intro-segment-block w-full mx-auto lg:mx-0">
+        <p class="intro-segment-title text-center lg:text-left text-base sm:text-lg font-semibold text-navy leading-tight">
+          Diseñado para operaciones de carga pesada con foco en margen por kilómetro.
+        </p>
+
+        <div class="intro-segment-strip mt-6" role="list" aria-label="Segmentos">
+          <div class="intro-segment-item" role="listitem">Flotas propias</div>
+          <div class="intro-segment-item" role="listitem">Operadores regionales</div>
+          <div class="intro-segment-item" role="listitem">PYMES en crecimiento</div>
+        </div>
+
+        <div class="intro-segment-carousel mt-6" aria-label="Segmentos móviles">
+          <div class="intro-segment-track">
+            <div class="intro-segment-chip">Flotas propias</div>
+            <div class="intro-segment-chip">Operadores regionales</div>
+            <div class="intro-segment-chip">PYMES en crecimiento</div>
+            <div class="intro-segment-chip">Flotas propias</div>
+            <div class="intro-segment-chip">Operadores regionales</div>
+            <div class="intro-segment-chip">PYMES en crecimiento</div>
+          </div>
         </div>
       </div>
     </div>
@@ -112,45 +120,82 @@
     color: var(--color-navy, #243b5a);
   }
 
-  .intro-ticker {
-    overflow: hidden;
+  .intro-segment-block {
     width: 100%;
-    position: relative;
+    max-width: 760px;
   }
 
-  .intro-ticker-track {
-    display: inline-flex;
-    align-items: center;
-    gap: 2.4rem;
-    min-width: max-content;
-    white-space: nowrap;
-    animation: introTicker 16s linear infinite;
+  .intro-segment-title {
+    display: inline-block;
+    width: 100%;
+    padding: 0.35rem 0.2rem 0.55rem;
+    border: 0;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
-  .intro-ticker-item {
-    font-size: 2rem;
-    line-height: 1.1;
+  .intro-segment-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border: 1px solid rgba(36, 59, 90, 0.10);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.52);
+    overflow: hidden;
+    box-shadow: 0 8px 22px rgba(36, 59, 90, 0.06);
+  }
+
+  .intro-segment-item {
+    min-height: 72px;
+    display: grid;
+    place-items: center;
+    padding: 0 0.9rem;
+    text-align: center;
+    font-size: 1.25rem;
     font-weight: 700;
-    color: #9ca9b6;
+    line-height: 1.1;
+    color: #243b5a;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
   }
 
-  .intro-ticker-item::after {
-    content: "•";
-    margin-left: 2.4rem;
-    color: #c1c9d4;
+  .intro-segment-item + .intro-segment-item {
+    border-left: 1px dashed rgba(36, 59, 90, 0.12);
   }
 
-  .intro-ticker-item:last-child::after {
-    content: "";
-    margin-left: 0;
+  .intro-segment-carousel {
+    display: none;
+    border: 1px solid rgba(36, 59, 90, 0.1);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.52);
+    overflow: hidden;
+    box-shadow: 0 8px 22px rgba(36, 59, 90, 0.06);
   }
 
-  @keyframes introTicker {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
+  .intro-segment-track {
+    display: flex;
+    width: max-content;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.9rem 0.75rem;
+    animation: intro-segment-marquee 14s linear infinite;
+  }
+
+  .intro-segment-chip {
+    white-space: nowrap;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #243b5a;
+    text-transform: none;
+    padding: 0.48rem 0.86rem;
+    border-radius: 999px;
+    border: 1px solid rgba(36, 59, 90, 0.12);
+    background: rgba(255, 255, 255, 0.72);
+  }
+
+  @media (min-width: 1024px) {
+    .intro-segment-block {
+      margin-inline: 0;
     }
   }
 
@@ -163,15 +208,15 @@
 
 	  @media (min-width: 1821px) {
     .intro-video-layer {
-      right: -50px;
-      width: 1240px;
+      right: -100px;
+      width: 1320px;
     }
   }
 
 	  @media (min-width: 1681px) and (max-width: 1820px) {
     .intro-video-layer {
-      right: -100px;
-      width: 1240px;
+      right: -150px;
+      width: 1320px;
     }
   }
 
@@ -179,22 +224,22 @@
 
 	  @media (min-width: 1501px) and (max-width: 1680px) {
     .intro-video-layer {
-      right: -200px;
-      width: 1240px;
+      right: -250px;
+      width: 1320px;
     }
   }
 
 			  @media (min-width: 1281px) and (max-width: 1500px) {
     .intro-video-layer {
-      right: -320px;
-      width: 1240px;
+      right: -370px;
+      width: 1320px;
     }
   }
 
 	  @media (min-width: 1201px) and (max-width: 1281px) {
     .intro-video-layer {
-      right: -350px;
-      width: 1240px;
+      right: -400px;
+      width: 1320px;
     }
   }
 
@@ -204,22 +249,20 @@
 
   @media (min-width: 1151px) and (max-width: 1200px) {
     .intro-video-layer {
-      right: -300px;
-      width: 1240px;
+      right: -350px;
+      width: 1320px;
     }
   }
 
   @media (min-width: 1024px) and (max-width: 1150px) {
     .intro-video-layer {
-      right: -350px;
-      width: 1240px;
+      right: -400px;
+      width: 1320px;
     }
   }
 
   @media (min-width: 1024px) and (max-width: 1366px) {
     .intro-video-layer {
-      top: -0.8rem;
-      bottom: -5.5rem;
       right: -420px;
       width: 1320px;
     }
@@ -242,6 +285,22 @@
     }
   }
 
+  @media (min-width: 768px) and (max-width: 1366px) {
+    .intro-text-content {
+      margin-top: 70px;
+    }
+
+    .intro-copy-panel {
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      padding: 0;
+    }
+  }
+
   @media (width: 1024px) and (height: 1366px) {
     .intro-video-layer {
       right: -500px;
@@ -249,20 +308,63 @@
   }
 
   @media (max-width: 1023px) {
+    .intro-copy-panel > .mt-8.lg\:hidden {
+      margin-top: 0.5rem;
+    }
+
     .intro-mobile-video {
       transform: translateX(-15%);
       width: 130%;
       max-width: none;
     }
 
-    .intro-ticker-item {
-      font-size: 1.6rem;
+    .intro-segment-strip {
+      grid-template-columns: 1fr;
+    }
+
+    .intro-segment-item {
+      min-height: 66px;
+      font-size: 1.35rem;
+    }
+
+    .intro-segment-item + .intro-segment-item {
+      border-left: 0;
+      border-top: 1px dashed rgba(36, 59, 90, 0.12);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .intro-segment-strip {
+      display: none;
+    }
+
+    .intro-segment-carousel {
+      display: block;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      overflow: visible;
+    }
+
+    .intro-segment-track {
+      padding: 0.25rem 0;
+      gap: 0.65rem;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .intro-ticker-track {
+    .intro-segment-track {
       animation: none;
+    }
+  }
+
+  @keyframes intro-segment-marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
     }
   }
 </style>

@@ -1,12 +1,7 @@
----
-const rawNumber = String(import.meta.env.PUBLIC_WHATSAPP_NUMBER ?? '543364113181');
-const cleanNumber = rawNumber.replace(/\D/g, '') || '543364113181';
-const defaultMessage =
-  'Hola Xendar, quiero conocer más sobre la plataforma y solicitar una demo.';
-const message = String(import.meta.env.PUBLIC_WHATSAPP_MESSAGE ?? defaultMessage);
-const href = cleanNumber
-  ? `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`
-  : '/#';
+﻿---
+const cleanNumber = '543364113181';
+const message = 'Hola Xendar, quiero conocer más sobre la plataforma y solicitar una demo.';
+const href = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
 ---
 
 <a

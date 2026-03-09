@@ -4,10 +4,7 @@
 
 <section id="intro" class="relative z-10 py-16 lg:py-24 bg-white overflow-hidden">
   <div class="intro-video-layer pointer-events-none absolute hidden lg:block z-0">
-    <div
-      class="intro-video-fade absolute inset-0"
-      style="mask-image: linear-gradient(to left, #000 62%, transparent 100%), linear-gradient(to top, #000 76%, transparent 100%); -webkit-mask-image: linear-gradient(to left, #000 62%, transparent 100%), linear-gradient(to top, #000 76%, transparent 100%);"
-    >
+    <div class="intro-video-fade absolute inset-0">
       <video
         class="h-full w-full object-contain opacity-72"
         style="object-position: right bottom;"
@@ -271,43 +268,68 @@
 </style>
 
 <script>
-  const title = document.querySelector('[data-scroll-fill]');
+  const setupScrollFill = () => {
+    const safeWindow = window as any;
 
-  if (title instanceof HTMLElement) {
+    if (typeof safeWindow.__introScrollFillCleanup === 'function') {
+      safeWindow.__introScrollFillCleanup();
+    }
+
+    const title = document.querySelector('[data-scroll-fill]');
+    if (!(title instanceof HTMLElement)) {
+      safeWindow.__introScrollFillCleanup = null;
+      return;
+    }
+
     const words = Array.from(title.querySelectorAll('.scroll-fill-word'));
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     if (reduceMotion.matches) {
       words.forEach((word) => word.classList.add('is-filled'));
-    } else {
-      let ticking = false;
-
-      const updateProgress = () => {
-        ticking = false;
-        const rect = title.getBoundingClientRect();
-        const vh = window.innerHeight || document.documentElement.clientHeight;
-
-        const start = vh * 0.88;
-        const end = vh * 0.28;
-        const raw = (start - rect.top) / (start - end);
-        const progress = Math.max(0, Math.min(1, raw));
-        const activeWords = Math.floor(progress * words.length);
-
-        words.forEach((word, index) => {
-          word.classList.toggle('is-filled', index < activeWords);
-        });
-      };
-
-      const requestUpdate = () => {
-        if (!ticking) {
-          ticking = true;
-          window.requestAnimationFrame(updateProgress);
-        }
-      };
-
-      window.addEventListener('scroll', requestUpdate, { passive: true });
-      window.addEventListener('resize', requestUpdate);
-      updateProgress();
+      safeWindow.__introScrollFillCleanup = null;
+      return;
     }
+
+    let ticking = false;
+
+    const updateProgress = () => {
+      ticking = false;
+      const rect = title.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+
+      const start = vh * 0.88;
+      const end = vh * 0.28;
+      const raw = (start - rect.top) / (start - end);
+      const progress = Math.max(0, Math.min(1, raw));
+      const activeWords = Math.floor(progress * words.length);
+
+      words.forEach((word, index) => {
+        word.classList.toggle('is-filled', index < activeWords);
+      });
+    };
+
+    const requestUpdate = () => {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(updateProgress);
+      }
+    };
+
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+    updateProgress();
+
+    safeWindow.__introScrollFillCleanup = () => {
+      window.removeEventListener('scroll', requestUpdate);
+      window.removeEventListener('resize', requestUpdate);
+    };
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupScrollFill, { once: true });
+  } else {
+    setupScrollFill();
   }
+
+  document.addEventListener('astro:page-load', setupScrollFill);
 </script>

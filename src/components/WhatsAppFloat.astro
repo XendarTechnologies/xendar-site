@@ -1,6 +1,6 @@
 ---
-const rawNumber = String(import.meta.env.PUBLIC_WHATSAPP_NUMBER ?? '');
-const cleanNumber = rawNumber.replace(/\D/g, '');
+const rawNumber = String(import.meta.env.PUBLIC_WHATSAPP_NUMBER ?? '543364113181');
+const cleanNumber = rawNumber.replace(/\D/g, '') || '543364113181';
 const defaultMessage =
   'Hola Xendar, quiero conocer más sobre la plataforma y solicitar una demo.';
 const message = String(import.meta.env.PUBLIC_WHATSAPP_MESSAGE ?? defaultMessage);

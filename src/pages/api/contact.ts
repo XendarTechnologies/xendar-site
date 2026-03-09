@@ -42,9 +42,9 @@ export const POST: APIRoute = async ({ request }) => {
     if (!resendApiKey || !fromEmail) {
       return new Response(
         JSON.stringify({
-          error: 'Falta configuración del servidor de correo (RESEND_API_KEY / CONTACT_FROM_EMAIL).',
+          error: 'El formulario no está configurado todavía en el servidor (faltan variables de correo).',
         }),
-        { status: 500, headers: { 'content-type': 'application/json; charset=utf-8' } }
+        { status: 503, headers: { 'content-type': 'application/json; charset=utf-8' } }
       );
     }
 
@@ -86,9 +86,16 @@ export const POST: APIRoute = async ({ request }) => {
     });
 
     if (!resendResponse.ok) {
-      const resendError = await resendResponse.text();
+      const resendBody = await resendResponse.text();
+      let resendMessage = resendBody;
+      try {
+        const parsed = JSON.parse(resendBody) as { message?: string; error?: string };
+        resendMessage = parsed.message || parsed.error || resendBody;
+      } catch {
+        // keep raw text as fallback
+      }
       return new Response(
-        JSON.stringify({ error: 'No se pudo enviar el mensaje.', detail: resendError }),
+        JSON.stringify({ error: 'No se pudo enviar el mensaje.', detail: resendMessage }),
         { status: 502, headers: { 'content-type': 'application/json; charset=utf-8' } }
       );
     }
@@ -107,4 +114,3 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 };
-

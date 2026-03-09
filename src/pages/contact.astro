@@ -195,7 +195,12 @@ import Footer from '../components/Footer.astro';
 
         const data = await response.json().catch(() => ({}));
         if (!response.ok) {
-          throw new Error(data?.error || 'No se pudo enviar el mensaje.');
+          const errorMessage = typeof data?.error === 'string'
+            ? data.error
+            : typeof data?.detail === 'string'
+              ? data.detail
+              : 'No se pudo enviar el mensaje.';
+          throw new Error(errorMessage);
         }
 
         form.reset();
@@ -203,7 +208,12 @@ import Footer from '../components/Footer.astro';
         status.classList.remove('hidden');
         status.classList.add('text-teal');
       } catch (error) {
-        status.textContent = error instanceof Error ? error.message : 'Error al enviar. Intentá nuevamente.';
+        const message = error instanceof Error
+          ? error.message
+          : typeof error === 'string'
+            ? error
+            : 'Error al enviar. Intentá nuevamente.';
+        status.textContent = message;
         status.classList.remove('hidden');
         status.classList.add('text-red-600');
       } finally {

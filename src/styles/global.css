@@ -135,10 +135,10 @@ body.page-home::before {
   left: 0;
   height: 145vh;
   background-image: url('/Background1.png');
-  background-position: 20% -400px;
+  background-position: 80% -420px;
   background-repeat: no-repeat;
   background-size: cover;
-  opacity: 0.54;
+  opacity: 0.62;
   pointer-events: none;
   z-index: -1;
   -webkit-mask-image: linear-gradient(
@@ -245,9 +245,21 @@ body.page-contact::after {
   display: none;
 }
 
+@media (min-width: 1281px) and (max-width: 1535px) {
+  body.page-home::before {
+    background-position: 78% -380px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  body.page-home::before {
+    background-position: 75% -320px;
+  }
+}
+
 @media (min-width: 769px) and (max-width: 1024px) {
   body.page-home::before {
-    background-position: 72% -460px;
+    background-position: 72% -260px;
   }
 
   body.page-about::before {
@@ -264,7 +276,7 @@ body.page-contact::after {
 @media (max-width: 768px) {
   body.page-home::before {
     height: 140vh;
-    background-position: 60% -180px;
+    background-position: 66% -140px;
     background-size: cover;
     -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 80%, rgba(0, 0, 0, 0.5) 94%, transparent 100%);
     mask-image: linear-gradient(to bottom, #000 0%, #000 80%, rgba(0, 0, 0, 0.5) 94%, transparent 100%);

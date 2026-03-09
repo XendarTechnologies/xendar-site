@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 
 interface Props {
   title?: string;
@@ -90,5 +91,6 @@ const softwareLd = {
   </head>
   <body class={`min-h-screen antialiased ${bodyClass}`.trim()}>
     <slot />
+    <WhatsAppFloat />
   </body>
 </html>

@@ -14,56 +14,77 @@ import Footer from '../components/Footer.astro';
 >
   <Navbar />
   <main class="pt-28 lg:pt-36 pb-16 lg:pb-24">
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="rounded-2xl bg-white/68 lg:bg-white/56 border border-navy/15 shadow-lg shadow-navy/10 p-5 sm:p-7 lg:p-10">
-        <h1 class="text-4xl sm:text-5xl font-bold text-navy leading-tight">
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="rounded-2xl bg-white/84 border border-navy/10 shadow-lg shadow-navy/10 backdrop-blur-[2px] p-6 sm:p-8 lg:p-10">
+        <div class="inline-flex items-center gap-2 bg-teal/10 text-teal px-3 py-1.5 rounded-full text-sm font-semibold">
           Sobre Xendar
+        </div>
+        <h1 class="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold text-navy leading-tight">
+          Tecnología logística con foco en rentabilidad real
         </h1>
-        <p class="mt-6 text-lg text-gray-700 leading-relaxed">
-          Muchas empresas de transporte no saben con precisión cuánto ganan o pierden en cada viaje.
-        </p>
-        <p class="mt-4 text-lg text-gray-700 leading-relaxed">
-          Kilómetros vacíos, decisiones intuitivas y falta de trazabilidad hacen que la rentabilidad se
-          pierda dentro de la operación diaria.
-        </p>
-        <p class="mt-4 text-lg text-gray-700 leading-relaxed">
-          Xendar convierte cada viaje en información clara para tomar decisiones rentables.
-        </p>
+        <div class="mt-6 grid gap-4 text-base sm:text-lg text-gray-700 leading-relaxed max-w-4xl">
+          <p>Muchas empresas de transporte no saben con precisión cuánto ganan o pierden en cada viaje.</p>
+          <p>Kilómetros vacíos, decisiones intuitivas y falta de trazabilidad hacen que la rentabilidad se pierda dentro de la operación diaria.</p>
+          <p>Xendar convierte cada viaje en información clara para tomar decisiones rentables.</p>
+        </div>
+      </header>
 
-        <h2 class="mt-12 text-2xl sm:text-3xl font-bold text-navy">
-          Qué es Xendar
-        </h2>
-        <p class="mt-4 text-lg text-gray-700 leading-relaxed">
-          Somos la infraestructura de control operativo para transporte de carga pesada.
-        </p>
-        <p class="mt-4 text-lg text-gray-700 leading-relaxed">
-          Un sistema que transforma cada viaje en:
-        </p>
-        <ul class="mt-4 space-y-2 text-lg text-gray-700 leading-relaxed list-disc pl-6">
-          <li>Datos auditables.</li>
-          <li>Trazabilidad verificable.</li>
-          <li>Métricas para tomar decisiones.</li>
-        </ul>
-        <p class="mt-4 text-lg text-gray-700 leading-relaxed">
-          La operación deja de depender de la intuición y pasa a basarse en información real.
-        </p>
+      <section class="mt-8 grid lg:grid-cols-2 gap-6">
+        <article class="rounded-2xl bg-white/82 border border-navy/10 shadow-md shadow-navy/5 backdrop-blur-[2px] p-6 sm:p-7">
+          <h2 class="text-2xl font-bold text-navy">Qué es Xendar</h2>
+          <p class="mt-4 text-base sm:text-lg text-gray-700 leading-relaxed">
+            Somos la infraestructura de control operativo para transporte de carga pesada.
+          </p>
+          <p class="mt-4 text-base sm:text-lg text-gray-700 leading-relaxed">
+            Un sistema que transforma cada viaje en:
+          </p>
+          <ul class="mt-4 space-y-3 text-base sm:text-lg text-gray-700">
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-teal/20 text-teal text-sm font-bold">✓</span>
+              <span class="font-medium text-navy">Datos auditables.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-teal/20 text-teal text-sm font-bold">✓</span>
+              <span class="font-medium text-navy">Trazabilidad verificable.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-teal/20 text-teal text-sm font-bold">✓</span>
+              <span class="font-medium text-navy">Métricas para tomar decisiones.</span>
+            </li>
+          </ul>
+          <p class="mt-4 text-base sm:text-lg text-gray-700 leading-relaxed">
+            La operación deja de depender de la intuición y pasa a basarse en información real.
+          </p>
+        </article>
 
-        <h2 class="mt-12 text-2xl sm:text-3xl font-bold text-navy">
-          Qué permite hacer Xendar
-        </h2>
-        <p class="mt-4 text-lg text-gray-700 leading-relaxed">
-          Con Xendar, las empresas pueden:
-        </p>
-        <ul class="mt-4 space-y-2 text-lg text-gray-700 leading-relaxed list-disc pl-6">
-          <li>Entender la rentabilidad real de cada viaje.</li>
-          <li>Detectar kilómetros improductivos.</li>
-          <li>Tener trazabilidad completa de la operación.</li>
-          <li>Tomar decisiones basadas en datos.</li>
-        </ul>
-        <p class="mt-6 text-lg text-gray-800 font-medium leading-relaxed">
-          Convertimos operación diaria en control real, medible y rentable.
-        </p>
-      </div>
+        <article class="rounded-2xl bg-white/82 border border-navy/10 shadow-md shadow-navy/5 backdrop-blur-[2px] p-6 sm:p-7">
+          <h2 class="text-2xl font-bold text-navy">Qué permite hacer Xendar</h2>
+          <p class="mt-4 text-base sm:text-lg text-gray-700 leading-relaxed">
+            Con Xendar, las empresas pueden:
+          </p>
+          <ul class="mt-4 space-y-3 text-base sm:text-lg text-gray-700">
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-teal/20 text-teal text-sm font-bold">✓</span>
+              <span class="font-medium text-navy">Entender la rentabilidad real de cada viaje.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-teal/20 text-teal text-sm font-bold">✓</span>
+              <span class="font-medium text-navy">Detectar kilómetros improductivos.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-teal/20 text-teal text-sm font-bold">✓</span>
+              <span class="font-medium text-navy">Tener trazabilidad completa de la operación.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-teal/20 text-teal text-sm font-bold">✓</span>
+              <span class="font-medium text-navy">Tomar decisiones basadas en datos.</span>
+            </li>
+          </ul>
+          <p class="mt-5 text-base sm:text-lg text-navy font-semibold leading-relaxed">
+            Convertimos operación diaria en control real, medible y rentable.
+          </p>
+        </article>
+      </section>
     </section>
   </main>
   <Footer />

@@ -1,9 +1,44 @@
-@import "@fontsource/montserrat/400.css";
-@import "@fontsource/montserrat/500.css";
-@import "@fontsource/montserrat/600.css";
-@import "@fontsource/montserrat/700.css";
-@import "@fontsource/montserrat/800.css";
 @import "tailwindcss";
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/montserrat-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/montserrat-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/montserrat-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/montserrat-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/montserrat-800.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
 
 @theme inline {
   /* XENDAR Palette - Base Tokens */
@@ -47,6 +82,40 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 220ms;
+    animation-timing-function: ease;
+  }
+
+  ::view-transition-old(root) {
+    animation-name: xendar-fade-out;
+  }
+
+  ::view-transition-new(root) {
+    animation-name: xendar-fade-in;
+  }
+}
+
+@keyframes xendar-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.96;
+  }
+}
+
+@keyframes xendar-fade-in {
+  from {
+    opacity: 0.96;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 body {

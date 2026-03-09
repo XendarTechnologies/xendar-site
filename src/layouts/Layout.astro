@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title?: string;
@@ -74,8 +75,15 @@ const softwareLd = {
     <meta name="twitter:description" content={twitterDescription} />
     <meta name="twitter:image" content={ogImage} />
 
+    <link rel="preload" href="/fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/montserrat-500.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/montserrat-600.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+    <ClientRouter />
     <script type="application/ld+json" set:html={JSON.stringify(organizationLd)}></script>
     <script type="application/ld+json" set:html={JSON.stringify(softwareLd)}></script>
   </head>

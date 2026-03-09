@@ -51,7 +51,7 @@ import Footer from '../components/Footer.astro';
         <article class="contact-panel bg-white p-8 sm:p-10 lg:p-14">
           <h2 class="text-3xl font-bold text-navy">Enviar mensaje</h2>
 
-          <form class="mt-8 space-y-6" action="mailto:contacto@xendar.com.ar" method="post" enctype="text/plain">
+          <form id="contact-form" class="mt-8 space-y-6" action="/api/contact" method="post">
             <div>
               <label for="nombre" class="block text-sm font-semibold text-navy mb-2">Nombre</label>
               <input
@@ -95,12 +95,17 @@ import Footer from '../components/Footer.astro';
               ></textarea>
             </div>
 
+            <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
             <button
+              id="contact-submit"
               type="submit"
               class="w-full rounded-xl bg-blue py-3.5 font-semibold text-white transition hover:bg-blue-dark"
             >
               Enviar mensaje
             </button>
+
+            <p id="contact-status" class="hidden text-sm font-medium" aria-live="polite"></p>
           </form>
         </article>
       </div>
@@ -153,3 +158,67 @@ import Footer from '../components/Footer.astro';
     }
   }
 </style>
+
+<script>
+  const setupContactForm = () => {
+    const form = document.getElementById('contact-form');
+    const submitButton = document.getElementById('contact-submit');
+    const status = document.getElementById('contact-status');
+
+    if (!(form instanceof HTMLFormElement) || !(submitButton instanceof HTMLButtonElement) || !(status instanceof HTMLParagraphElement)) {
+      return;
+    }
+
+    const resetStatus = () => {
+      status.classList.add('hidden');
+      status.classList.remove('text-red-600', 'text-teal');
+      status.textContent = '';
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      resetStatus();
+
+      submitButton.disabled = true;
+      submitButton.classList.add('opacity-70', 'cursor-not-allowed');
+      submitButton.textContent = 'Enviando...';
+
+      try {
+        const payload = new FormData(form);
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          body: payload,
+          headers: {
+            Accept: 'application/json',
+          },
+        });
+
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          throw new Error(data?.error || 'No se pudo enviar el mensaje.');
+        }
+
+        form.reset();
+        status.textContent = 'Mensaje enviado. Te vamos a responder a la brevedad.';
+        status.classList.remove('hidden');
+        status.classList.add('text-teal');
+      } catch (error) {
+        status.textContent = error instanceof Error ? error.message : 'Error al enviar. Intentá nuevamente.';
+        status.classList.remove('hidden');
+        status.classList.add('text-red-600');
+      } finally {
+        submitButton.disabled = false;
+        submitButton.classList.remove('opacity-70', 'cursor-not-allowed');
+        submitButton.textContent = 'Enviar mensaje';
+      }
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupContactForm, { once: true });
+  } else {
+    setupContactForm();
+  }
+
+  document.addEventListener('astro:page-load', setupContactForm);
+</script>

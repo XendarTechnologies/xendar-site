@@ -90,22 +90,57 @@ const navLinks = [
 </header>
 
 <script>
-  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
+  const setupMobileNav = () => {
+    const safeWindow = window;
+    if (typeof safeWindow.__xendarMobileNavCleanup === 'function') {
+      safeWindow.__xendarMobileNavCleanup();
+    }
 
-  mobileMenuBtn?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden');
-    const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
-    mobileMenuBtn.setAttribute('aria-expanded', String(!isExpanded));
-  });
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-  const closeMobileMenu = () => {
-    if (!mobileMenu || !mobileMenuBtn) return;
-    mobileMenu.classList.add('hidden');
-    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    if (!(mobileMenuBtn instanceof HTMLButtonElement) || !(mobileMenu instanceof HTMLElement)) {
+      safeWindow.__xendarMobileNavCleanup = null;
+      return;
+    }
+
+    const closeMobileMenu = () => {
+      mobileMenu.classList.add('hidden');
+      mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    };
+
+    const toggleMobileMenu = () => {
+      mobileMenu.classList.toggle('hidden');
+      const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+      mobileMenuBtn.setAttribute('aria-expanded', String(!isExpanded));
+    };
+
+    const onResize = () => {
+      if (window.innerWidth >= 1024) {
+        closeMobileMenu();
+      }
+    };
+
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+    window.addEventListener('resize', onResize);
+
+    safeWindow.__xendarMobileNavCleanup = () => {
+      mobileMenuBtn.removeEventListener('click', toggleMobileMenu);
+      mobileMenu.querySelectorAll('a').forEach((link) => {
+        link.removeEventListener('click', closeMobileMenu);
+      });
+      window.removeEventListener('resize', onResize);
+    };
   };
 
-  mobileMenu?.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', closeMobileMenu);
-  });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupMobileNav, { once: true });
+  } else {
+    setupMobileNav();
+  }
+
+  document.addEventListener('astro:page-load', setupMobileNav);
 </script>

@@ -91,7 +91,7 @@ const navLinks = [
 
 <script>
   const setupMobileNav = () => {
-    const safeWindow = window;
+    const safeWindow = window as any;
     if (typeof safeWindow.__xendarMobileNavCleanup === 'function') {
       safeWindow.__xendarMobileNavCleanup();
     }

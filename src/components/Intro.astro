@@ -22,24 +22,9 @@
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="intro-text-content">
       <div class="intro-copy-panel relative z-10 max-w-3xl text-center lg:text-left">
-        <h2
-          data-scroll-fill
-          class="scroll-fill-title max-w-4xl mx-auto lg:mx-0 text-3xl sm:text-4xl lg:text-5xl font-bold text-center lg:text-left leading-tight"
-        >
-          <span class="scroll-fill-line">
-            <span class="scroll-fill-word">Cada</span>
-            <span class="scroll-fill-word">camión</span>
-            <span class="scroll-fill-word">genera</span>
-            <span class="scroll-fill-word">datos.</span>
-          </span>
-          <span class="scroll-fill-line">
-            <span class="scroll-fill-word">Xendar</span>
-            <span class="scroll-fill-word">los</span>
-            <span class="scroll-fill-word">convierte</span>
-            <span class="scroll-fill-word">en</span>
-            <span class="scroll-fill-word">ahorro</span>
-            <span class="scroll-fill-word">real.</span>
-          </span>
+        <h2 class="max-w-4xl mx-auto lg:mx-0 text-3xl sm:text-4xl lg:text-5xl font-bold text-center lg:text-left text-navy leading-tight">
+          <span class="block">Cada camión genera datos.</span>
+          <span class="block">Xendar los convierte en ahorro real.</span>
         </h2>
         <p class="mt-6 text-lg text-gray-600 leading-relaxed">
           Analizamos los viajes de tu flota para detectar: kilómetros en vacío, desvíos innecesarios,
@@ -103,21 +88,6 @@
       linear-gradient(to bottom, #000 78%, transparent 100%);
     -webkit-mask-image: linear-gradient(to left, #000 62%, transparent 100%),
       linear-gradient(to bottom, #000 78%, transparent 100%);
-  }
-
-  .scroll-fill-line {
-    display: block;
-  }
-
-  .scroll-fill-word {
-    display: inline-block;
-    margin-right: 0.22em;
-    color: #9ca9b6;
-    transition: color 180ms ease;
-  }
-
-  .scroll-fill-word.is-filled {
-    color: var(--color-navy, #243b5a);
   }
 
   .intro-segment-block {
@@ -199,13 +169,6 @@
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .scroll-fill-word {
-      color: var(--color-navy, #243b5a) !important;
-      transition: none;
-    }
-  }
-
 	  @media (min-width: 1821px) {
     .intro-video-layer {
       right: -100px;
@@ -229,42 +192,40 @@
     }
   }
 
-			  @media (min-width: 1281px) and (max-width: 1500px) {
+	@media (min-width: 1351px) and (max-width: 1500px) {
+    .intro-video-layer {
+      right: -300px;
+      width: 1280px;
+    }
+  }
+
+
+			  @media (min-width: 1281px) and (max-width: 1350px) {
     .intro-video-layer {
       right: -370px;
-      width: 1320px;
+      width: 1250px;
     }
   }
 
 	  @media (min-width: 1201px) and (max-width: 1281px) {
     .intro-video-layer {
       right: -400px;
-      width: 1320px;
+      width: 1220px;
     }
   }
 
 
-
-
-
   @media (min-width: 1151px) and (max-width: 1200px) {
     .intro-video-layer {
-      right: -350px;
-      width: 1320px;
+      right: -400px;
+      width: 1180px;
     }
   }
 
   @media (min-width: 1024px) and (max-width: 1150px) {
     .intro-video-layer {
-      right: -400px;
-      width: 1320px;
-    }
-  }
-
-  @media (min-width: 1024px) and (max-width: 1366px) {
-    .intro-video-layer {
-      right: -420px;
-      width: 1320px;
+      right: -450px;
+      width: 1180px;
     }
 
     .intro-video-fade {
@@ -368,70 +329,3 @@
     }
   }
 </style>
-
-<script>
-  const setupScrollFill = () => {
-    const safeWindow = window as any;
-
-    if (typeof safeWindow.__introScrollFillCleanup === 'function') {
-      safeWindow.__introScrollFillCleanup();
-    }
-
-    const title = document.querySelector('[data-scroll-fill]');
-    if (!(title instanceof HTMLElement)) {
-      safeWindow.__introScrollFillCleanup = null;
-      return;
-    }
-
-    const words = Array.from(title.querySelectorAll('.scroll-fill-word'));
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-    if (reduceMotion.matches) {
-      words.forEach((word) => word.classList.add('is-filled'));
-      safeWindow.__introScrollFillCleanup = null;
-      return;
-    }
-
-    let ticking = false;
-
-    const updateProgress = () => {
-      ticking = false;
-      const rect = title.getBoundingClientRect();
-      const vh = window.innerHeight || document.documentElement.clientHeight;
-
-      const start = vh * 0.88;
-      const end = vh * 0.28;
-      const raw = (start - rect.top) / (start - end);
-      const progress = Math.max(0, Math.min(1, raw));
-      const activeWords = Math.floor(progress * words.length);
-
-      words.forEach((word, index) => {
-        word.classList.toggle('is-filled', index < activeWords);
-      });
-    };
-
-    const requestUpdate = () => {
-      if (!ticking) {
-        ticking = true;
-        window.requestAnimationFrame(updateProgress);
-      }
-    };
-
-    window.addEventListener('scroll', requestUpdate, { passive: true });
-    window.addEventListener('resize', requestUpdate);
-    updateProgress();
-
-    safeWindow.__introScrollFillCleanup = () => {
-      window.removeEventListener('scroll', requestUpdate);
-      window.removeEventListener('resize', requestUpdate);
-    };
-  };
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupScrollFill, { once: true });
-  } else {
-    setupScrollFill();
-  }
-
-  document.addEventListener('astro:page-load', setupScrollFill);
-</script>

@@ -76,8 +76,20 @@ const mapImageUrl = '/mapa-nocturno.png';
           Monitoreo operativo
         </div>
 
-        <h2 class="text-3xl sm:text-4xl font-bold text-navy leading-tight">
-          Visibilidad completa de tu operación logística
+        <h2
+          data-scroll-fill-map
+          class="scroll-fill-title text-3xl sm:text-4xl font-bold leading-tight"
+        >
+          <span class="scroll-fill-line">
+            <span class="scroll-fill-word">Visibilidad</span>
+            <span class="scroll-fill-word">completa</span>
+            <span class="scroll-fill-word">de</span>
+            <span class="scroll-fill-word">tu</span>
+          </span>
+          <span class="scroll-fill-line">
+            <span class="scroll-fill-word">operación</span>
+            <span class="scroll-fill-word">logística</span>
+          </span>
         </h2>
 
         <p class="mt-6 text-lg text-gray-600 leading-relaxed">
@@ -135,3 +147,94 @@ const mapImageUrl = '/mapa-nocturno.png';
     </div>
   </div>
 </section>
+
+<style>
+  .scroll-fill-line {
+    display: block;
+  }
+
+  .scroll-fill-word {
+    display: inline-block;
+    margin-right: 0.22em;
+    color: #9ca9b6;
+    transition: color 180ms ease;
+  }
+
+  .scroll-fill-word.is-filled {
+    color: var(--color-navy, #243b5a);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-fill-word {
+      color: var(--color-navy, #243b5a) !important;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const setupMapScrollFill = () => {
+    const safeWindow = window as any;
+
+    if (typeof safeWindow.__mapScrollFillCleanup === 'function') {
+      safeWindow.__mapScrollFillCleanup();
+    }
+
+    const title = document.querySelector('[data-scroll-fill-map]');
+    if (!(title instanceof HTMLElement)) {
+      safeWindow.__mapScrollFillCleanup = null;
+      return;
+    }
+
+    const words = Array.from(title.querySelectorAll('.scroll-fill-word'));
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    if (reduceMotion.matches) {
+      words.forEach((word) => word.classList.add('is-filled'));
+      safeWindow.__mapScrollFillCleanup = null;
+      return;
+    }
+
+    let ticking = false;
+
+    const updateProgress = () => {
+      ticking = false;
+      const rect = title.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+
+      const start = vh * 0.88;
+      const end = vh * 0.28;
+      const raw = (start - rect.top) / (start - end);
+      const progress = Math.max(0, Math.min(1, raw));
+      const activeWords = Math.floor(progress * words.length);
+
+      words.forEach((word, index) => {
+        word.classList.toggle('is-filled', index < activeWords);
+      });
+    };
+
+    const requestUpdate = () => {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(updateProgress);
+      }
+    };
+
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+    updateProgress();
+
+    safeWindow.__mapScrollFillCleanup = () => {
+      window.removeEventListener('scroll', requestUpdate);
+      window.removeEventListener('resize', requestUpdate);
+    };
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupMapScrollFill, { once: true });
+  } else {
+    setupMapScrollFill();
+  }
+
+  document.addEventListener('astro:page-load', setupMapScrollFill);
+</script>

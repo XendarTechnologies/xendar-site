@@ -24,7 +24,7 @@ const navLinks = [
       </a>
 
       <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center gap-8">
+      <div class="hidden lg:flex items-center gap-8">
         {navLinks.map((link) => (
           <a 
             href={link.href} 
@@ -36,7 +36,7 @@ const navLinks = [
       </div>
 
       <!-- CTA Buttons -->
-      <div class="hidden md:flex items-center gap-4">
+      <div class="hidden lg:flex items-center gap-4">
           <a href="/contact" class="text-navy font-medium hover:text-blue transition-colors">
             Ingresar
           </a>
@@ -51,7 +51,7 @@ const navLinks = [
       <!-- Mobile Menu Button -->
       <button 
         id="mobile-menu-btn"
-        class="md:hidden p-2 text-navy"
+        class="lg:hidden p-2 text-navy"
         aria-label="Abrir menú"
         aria-controls="mobile-menu"
         aria-expanded="false"
@@ -63,7 +63,7 @@ const navLinks = [
     </div>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden pb-4">
+    <div id="mobile-menu" class="hidden lg:hidden pb-4">
       <div class="flex flex-col gap-4">
         {navLinks.map((link) => (
           <a 

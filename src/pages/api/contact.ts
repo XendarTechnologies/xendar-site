@@ -1,6 +1,37 @@
 import type { APIRoute } from 'astro';
 
+export const prerender = false;
+
 const resendApiUrl = 'https://api.resend.com/emails';
+
+const parseMultipartBody = (raw: string, contentType: string) => {
+  const dict: Record<string, string> = {};
+  const boundaryMatch = contentType.match(/boundary=([^;]+)/i);
+  if (!boundaryMatch?.[1]) return dict;
+
+  const boundary = boundaryMatch[1].trim().replace(/^"|"$/g, '');
+  const parts = raw.split(`--${boundary}`);
+
+  for (const part of parts) {
+    const normalized = part.trim();
+    if (!normalized || normalized === '--') continue;
+
+    const nameMatch = normalized.match(/name="([^"]+)"/i);
+    if (!nameMatch?.[1]) continue;
+
+    const key = nameMatch[1].trim().toLowerCase();
+    const splitIndex = normalized.indexOf('\r\n\r\n') >= 0
+      ? normalized.indexOf('\r\n\r\n')
+      : normalized.indexOf('\n\n');
+
+    if (splitIndex === -1) continue;
+    const rawValue = normalized.slice(splitIndex).replace(/^\r?\n\r?\n/, '');
+    const value = rawValue.replace(/\r?\n$/, '').trim();
+    dict[key] = value;
+  }
+
+  return dict;
+};
 
 const escapeHtml = (value: string) =>
   value
@@ -20,16 +51,22 @@ export const POST: APIRoute = async ({ request }) => {
     let mensaje = '';
     let website = '';
 
-    if (
-      contentType.includes('multipart/form-data') ||
-      contentType.includes('application/x-www-form-urlencoded')
-    ) {
-      const formData = await request.formData();
-      website = String(formData.get('website') ?? '').trim();
-      nombre = String(formData.get('nombre') ?? '').trim();
-      correo = String(formData.get('correo') ?? '').trim();
-      empresa = String(formData.get('empresa') ?? '').trim();
-      mensaje = String(formData.get('mensaje') ?? '').trim();
+    if (contentType.includes('multipart/form-data')) {
+      const raw = await request.text();
+      const dict = parseMultipartBody(raw, contentType);
+      website = String(dict.website ?? '').trim();
+      nombre = String(dict.nombre ?? '').trim();
+      correo = String(dict.correo ?? '').trim();
+      empresa = String(dict.empresa ?? '').trim();
+      mensaje = String(dict.mensaje ?? '').trim();
+    } else if (contentType.includes('application/x-www-form-urlencoded')) {
+      const raw = await request.text();
+      const params = new URLSearchParams(raw);
+      website = String(params.get('website') ?? '').trim();
+      nombre = String(params.get('nombre') ?? '').trim();
+      correo = String(params.get('correo') ?? '').trim();
+      empresa = String(params.get('empresa') ?? '').trim();
+      mensaje = String(params.get('mensaje') ?? '').trim();
     } else if (contentType.includes('application/json')) {
       const body = (await request.json()) as Record<string, unknown>;
       website = String(body.website ?? '').trim();
@@ -57,6 +94,18 @@ export const POST: APIRoute = async ({ request }) => {
           if (!key || rest.length === 0) continue;
           dict[key.trim().toLowerCase()] = rest.join(':').trim();
         }
+
+        // Fallback para formato alternado por líneas:
+        // nombre\nAlejandro\ncorreo\na@b.com...
+        if (Object.keys(dict).length === 0) {
+          for (let i = 0; i < lines.length - 1; i += 2) {
+            const key = lines[i]?.trim().toLowerCase();
+            const value = lines[i + 1]?.trim();
+            if (!key) continue;
+            dict[key] = value ?? '';
+          }
+        }
+
         website = dict.website ?? '';
         nombre = dict.nombre ?? '';
         correo = dict.correo ?? '';

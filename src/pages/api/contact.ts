@@ -193,7 +193,7 @@ export const POST: APIRoute = async ({ request }) => {
         // keep raw text as fallback
       }
       return new Response(
-        JSON.stringify({ error: 'No se pudo enviar el mensaje.', detail: resendMessage }),
+        JSON.stringify({ error: resendMessage, detail: resendMessage }),
         { status: 502, headers: { 'content-type': 'application/json; charset=utf-8' } }
       );
     }

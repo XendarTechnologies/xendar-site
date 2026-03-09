@@ -195,11 +195,12 @@ import Footer from '../components/Footer.astro';
 
         const data = await response.json().catch(() => ({}));
         if (!response.ok) {
-          const errorMessage = typeof data?.error === 'string'
-            ? data.error
-            : typeof data?.detail === 'string'
+          const errorMessage =
+            typeof data?.detail === 'string' && data.detail.trim().length > 0
               ? data.detail
-              : 'No se pudo enviar el mensaje.';
+              : typeof data?.error === 'string' && data.error.trim().length > 0
+                ? data.error
+                : 'No se pudo enviar el mensaje.';
           throw new Error(errorMessage);
         }
 

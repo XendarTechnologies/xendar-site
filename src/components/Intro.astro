@@ -84,8 +84,8 @@
   .intro-video-layer {
     top: 0.7rem;
     bottom: 0.2rem;
-    right: clamp(170px, 10vw, 280px);
-    width: clamp(980px, 70vw, 1320px);
+    right: -120px;
+    width: 1080px;
   }
 
   .intro-video-fade {
@@ -117,10 +117,39 @@
     }
   }
 
-  @media (min-width: 1024px) and (max-width: 1280px) {
+	  @media (min-width: 1601px) {
     .intro-video-layer {
-      right: clamp(95px, 6vw, 180px);
-      width: clamp(760px, 64vw, 1080px);
+      right: -50px;
+      width: 1240px;
+    }
+  }
+
+
+	  @media (min-width: 1282px) and (max-width: 1600px) {
+    .intro-video-layer {
+      right: -200px;
+      width: 1240px;
+    }
+  }
+
+	  @media (min-width: 1201px) and (max-width: 1281px) {
+    .intro-video-layer {
+      right: -300px;
+      width: 1240px;
+    }
+  }
+
+  @media (min-width: 1151px) and (max-width: 1200px) {
+    .intro-video-layer {
+      right: -300px;
+      width: 1240px;
+    }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1150px) {
+    .intro-video-layer {
+      right: -350px;
+      width: 1240px;
     }
   }
 

@@ -23,7 +23,7 @@
   </div>
 
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="relative z-10 max-w-3xl text-center lg:text-left">
+    <div class="intro-copy-panel relative z-10 max-w-3xl text-center lg:text-left">
         <h2
           data-scroll-fill
           class="scroll-fill-title max-w-4xl mx-auto lg:mx-0 text-3xl sm:text-4xl lg:text-5xl font-bold text-center lg:text-left leading-tight"
@@ -95,9 +95,9 @@
 
   .intro-video-fade {
     mask-image: linear-gradient(to left, #000 62%, transparent 100%),
-      linear-gradient(to top, #000 76%, transparent 100%);
+      linear-gradient(to bottom, #000 78%, transparent 100%);
     -webkit-mask-image: linear-gradient(to left, #000 62%, transparent 100%),
-      linear-gradient(to top, #000 76%, transparent 100%);
+      linear-gradient(to bottom, #000 78%, transparent 100%);
   }
 
   .scroll-fill-line {
@@ -164,27 +164,46 @@
     }
   }
 
-	  @media (min-width: 1601px) {
+	  @media (min-width: 1821px) {
     .intro-video-layer {
       right: -50px;
       width: 1240px;
     }
   }
 
+	  @media (min-width: 1681px) and (max-width: 1820px) {
+    .intro-video-layer {
+      right: -100px;
+      width: 1240px;
+    }
+  }
 
-	  @media (min-width: 1282px) and (max-width: 1600px) {
+
+
+	  @media (min-width: 1501px) and (max-width: 1680px) {
     .intro-video-layer {
       right: -200px;
       width: 1240px;
     }
   }
 
-	  @media (min-width: 1201px) and (max-width: 1281px) {
+			  @media (min-width: 1281px) and (max-width: 1500px) {
     .intro-video-layer {
-      right: -300px;
+      right: -320px;
       width: 1240px;
     }
   }
+
+	  @media (min-width: 1201px) and (max-width: 1281px) {
+    .intro-video-layer {
+      right: -350px;
+      width: 1240px;
+    }
+  }
+
+
+
+
 
   @media (min-width: 1151px) and (max-width: 1200px) {
     .intro-video-layer {
@@ -197,6 +216,38 @@
     .intro-video-layer {
       right: -350px;
       width: 1240px;
+    }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1366px) {
+    .intro-video-layer {
+      top: -0.8rem;
+      bottom: -5.5rem;
+      right: -420px;
+      width: 1320px;
+    }
+
+    .intro-video-fade {
+      mask-image: linear-gradient(to left, #000 70%, transparent 100%),
+        linear-gradient(to bottom, #000 70%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to left, #000 70%, transparent 100%),
+        linear-gradient(to bottom, #000 70%, transparent 100%);
+    }
+
+    .intro-copy-panel {
+      background: rgba(255, 255, 255, 0.56);
+      border: 1px solid rgba(36, 59, 90, 0.14);
+      border-radius: 1.05rem;
+      box-shadow: 0 12px 30px rgba(36, 59, 90, 0.1);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      padding: 1.1rem 1.15rem;
+    }
+  }
+
+  @media (width: 1024px) and (height: 1366px) {
+    .intro-video-layer {
+      right: -500px;
     }
   }
 

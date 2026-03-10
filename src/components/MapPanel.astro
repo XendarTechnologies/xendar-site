@@ -157,6 +157,11 @@
   .scroll-fill-word {
     display: inline-block;
     margin-right: 0.22em;
+    color: #556a80;
+    transition: color 180ms ease;
+  }
+
+  .scroll-fill-word.is-filled {
     color: var(--color-navy, #243b5a);
   }
 
@@ -166,3 +171,69 @@
     }
   }
 </style>
+
+<script>
+  const setupMapScrollFill = () => {
+    const safeWindow = window as any;
+
+    if (typeof safeWindow.__mapScrollFillCleanup === "function") {
+      safeWindow.__mapScrollFillCleanup();
+    }
+
+    const title = document.querySelector("[data-scroll-fill-map]");
+    if (!(title instanceof HTMLElement)) {
+      safeWindow.__mapScrollFillCleanup = null;
+      return;
+    }
+
+    const words = Array.from(title.querySelectorAll(".scroll-fill-word"));
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const isMobile = window.matchMedia("(max-width: 1023px)");
+
+    if (reduceMotion.matches || isMobile.matches) {
+      words.forEach((word) => word.classList.add("is-filled"));
+      safeWindow.__mapScrollFillCleanup = null;
+      return;
+    }
+
+    let ticking = false;
+
+    const updateProgress = () => {
+      ticking = false;
+      const rect = title.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+
+      const start = vh * 0.88;
+      const end = vh * 0.28;
+      const raw = (start - rect.top) / (start - end);
+      const progress = Math.max(0, Math.min(1, raw));
+      const activeWords = Math.floor(progress * words.length);
+
+      words.forEach((word, index) => {
+        word.classList.toggle("is-filled", index < activeWords);
+      });
+    };
+
+    const requestUpdate = () => {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(updateProgress);
+      }
+    };
+
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    updateProgress();
+
+    safeWindow.__mapScrollFillCleanup = () => {
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+    };
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupMapScrollFill, { once: true });
+  } else {
+    setupMapScrollFill();
+  }
+</script>

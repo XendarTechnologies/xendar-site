@@ -3,6 +3,13 @@ import type { APIRoute } from 'astro';
 export const prerender = false;
 
 const resendApiUrl = 'https://api.resend.com/emails';
+const emailLikePattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const namedEmailPattern = /^.+<\s*[^\s@]+@[^\s@]+\.[^\s@]+\s*>$/;
+
+const isValidResendMailbox = (value: string) => {
+  const normalized = value.trim();
+  return emailLikePattern.test(normalized) || namedEmailPattern.test(normalized);
+};
 
 const parseMultipartBody = (raw: string, contentType: string) => {
   const dict: Record<string, string> = {};
@@ -141,6 +148,16 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(
         JSON.stringify({
           error: `Falta configuración del servidor: ${missing.join(', ')}`,
+        }),
+        { status: 503, headers: { 'content-type': 'application/json; charset=utf-8' } }
+      );
+    }
+
+    if (!isValidResendMailbox(String(fromEmail))) {
+      return new Response(
+        JSON.stringify({
+          error:
+            'CONTACT_FROM_EMAIL inválido. Usá formato "email@dominio.com" o "Nombre <email@dominio.com>".',
         }),
         { status: 503, headers: { 'content-type': 'application/json; charset=utf-8' } }
       );

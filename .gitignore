@@ -28,3 +28,5 @@ AGENTS.md
 
 .vercel/
 
+.vercel
+.env*.local

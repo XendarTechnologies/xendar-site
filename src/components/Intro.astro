@@ -330,17 +330,19 @@
 
 <script>
   const setupIntroVideoPlayback = () => {
-    const safeWindow = window as any;
-    if (safeWindow.__introVideoReady) {
+    const root = document.documentElement;
+    if (root.dataset.introVideoReady === 'true') {
       return;
     }
-    safeWindow.__introVideoReady = true;
+    root.dataset.introVideoReady = 'true';
 
-    const videos = Array.from(document.querySelectorAll('.intro-video-el'));
+    const videos = Array.from(document.querySelectorAll('.intro-video-el')).filter(
+      (video): video is HTMLVideoElement => video instanceof HTMLVideoElement
+    );
     if (!videos.length) return;
 
     const hydrateAndPlay = (video: HTMLVideoElement) => {
-      const source = video.querySelector('source[type="video/mp4"]');
+      const source = video.querySelector('source[data-src]');
       if (source instanceof HTMLSourceElement && !source.src && source.dataset.src) {
         source.src = source.dataset.src;
         video.load();
@@ -350,34 +352,30 @@
     };
 
     videos.forEach((video) => {
-      if (!(video instanceof HTMLVideoElement)) return;
       video.muted = true;
       video.playsInline = true;
       video.loop = true;
       video.setAttribute('muted', '');
       video.setAttribute('playsinline', '');
-      if (video.textTracks && video.textTracks.length) {
-        Array.from(video.textTracks).forEach((track) => {
-          track.mode = 'hidden';
-        });
-      }
-
-      if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (!entry.isIntersecting) return;
-              hydrateAndPlay(video);
-              observer.disconnect();
-            });
-          },
-          { rootMargin: '120px 0px', threshold: 0.1 }
-        );
-        observer.observe(video);
-      } else {
-        hydrateAndPlay(video);
-      }
     });
+
+    if (!('IntersectionObserver' in window)) {
+      videos.forEach(hydrateAndPlay);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!(entry.target instanceof HTMLVideoElement) || !entry.isIntersecting) return;
+          hydrateAndPlay(entry.target);
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: '120px 0px', threshold: 0.1 }
+    );
+
+    videos.forEach((video) => observer.observe(video));
   };
 
   if (document.readyState === 'loading') {

@@ -13,6 +13,7 @@ interface Props {
   twitterTitle?: string;
   twitterDescription?: string;
   bodyClass?: string;
+  robots?: string;
 }
 
 const {
@@ -26,6 +27,7 @@ const {
   twitterTitle = "Xendar | Optimización logística basada en datos",
   twitterDescription = "Menos kilómetros vacíos, mejor costo por kilómetro y control total de flota.",
   bodyClass = "",
+  robots = "noindex, nofollow, noarchive, nosnippet, noimageindex",
 } = Astro.props;
 
 const organizationLd = {
@@ -57,7 +59,8 @@ const softwareLd = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={robots} />
+    <meta name="googlebot" content={robots} />
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
     <link rel="canonical" href={canonical} />

@@ -7,8 +7,11 @@ import viteCompression from 'vite-plugin-compression';
 
 // https://astro.build/config
 export default defineConfig({
-	output: 'server',
+  output: 'server',
   adapter: vercel(),
+  security: {
+    checkOrigin: false,
+  },
   devToolbar: {
     enabled: false,
   },

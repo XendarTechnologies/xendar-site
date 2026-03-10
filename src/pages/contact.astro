@@ -169,6 +169,10 @@ import Footer from '../components/Footer.astro';
     if (!(form instanceof HTMLFormElement) || !(submitButton instanceof HTMLButtonElement) || !(status instanceof HTMLParagraphElement)) {
       return;
     }
+    if (form.dataset.bound === 'true') {
+      return;
+    }
+    form.dataset.bound = 'true';
 
     const resetStatus = () => {
       status.classList.add('hidden');

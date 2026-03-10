@@ -137,17 +137,13 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const resendApiKey = import.meta.env.RESEND_API_KEY;
-    const fromEmail = import.meta.env.EMAIL_FROM ?? import.meta.env.CONTACT_FROM_EMAIL;
-    const replyToEmail =
-      import.meta.env.EMAIL_REPLY_TO ??
-      import.meta.env.CONTACT_REPLY_TO ??
-      '';
-    const toEmail =
-      import.meta.env.CONTACT_TO_EMAIL ?? import.meta.env.EMAIL_REPLY_TO ?? 'contacto@xendar.com.ar';
+    const fromEmail = import.meta.env.EMAIL_FROM;
+    const toEmail = import.meta.env.CONTACT_TO_EMAIL ?? 'contacto@xendar.com.ar';
 
     const missing: string[] = [];
     if (!resendApiKey) missing.push('RESEND_API_KEY');
     if (!fromEmail) missing.push('EMAIL_FROM');
+    if (!toEmail) missing.push('CONTACT_TO_EMAIL');
 
     if (missing.length > 0) {
       return new Response(
@@ -197,8 +193,8 @@ export const POST: APIRoute = async ({ request }) => {
       },
       body: JSON.stringify({
         from: fromEmail,
-        to: toEmail.split(',').map((value: string) => value.trim()).filter(Boolean),
-        reply_to: replyToEmail || correo,
+        to: [toEmail],
+        reply_to: correo,
         subject,
         html,
         text,

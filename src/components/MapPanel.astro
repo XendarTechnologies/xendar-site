@@ -1,14 +1,11 @@
 ---
-const mapImageUrl = '/mapa-nocturno.png';
 ---
 
 <section id="solutions" class="py-16 lg:py-24 bg-soft-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-      <!-- Left - Map Visualization -->
       <div class="relative order-2 lg:order-1">
         <div class="relative bg-navy rounded-2xl overflow-hidden shadow-2xl">
-          <!-- Map Header -->
           <div class="px-6 py-4 border-b border-white/10 flex items-center justify-between">
             <div class="flex items-center gap-3">
               <div class="w-8 h-8 bg-teal/20 rounded-lg flex items-center justify-center">
@@ -24,36 +21,48 @@ const mapImageUrl = '/mapa-nocturno.png';
             </div>
           </div>
 
-          <!-- Map Content -->
           <div class="h-[350px] lg:h-[420px]">
-            <img
-              src={mapImageUrl}
-              class="w-full h-full object-cover object-center"
-              loading="lazy"
-              decoding="async"
-            />
+            <picture>
+              <source
+                type="image/avif"
+                srcset="/optimized/mapa-nocturno-768.avif 768w, /optimized/mapa-nocturno.avif 1024w"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <source
+                type="image/webp"
+                srcset="/optimized/mapa-nocturno-768.webp 768w, /optimized/mapa-nocturno.webp 1024w"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <img
+                src="/optimized/mapa-nocturno.webp"
+                alt="Mapa de seguimiento de flota con rutas activas"
+                class="w-full h-full object-cover object-center"
+                loading="lazy"
+                decoding="async"
+                width="1024"
+                height="1024"
+              />
+            </picture>
           </div>
 
-          <!-- Map Footer Stats -->
           <div class="px-6 py-4 bg-navy border-t border-white/10">
             <div class="grid grid-cols-3 gap-4">
               <div class="text-center">
                 <div class="text-2xl font-bold text-cyan">24</div>
-                <div class="text-xs text-gray-400">Vehículos activos</div>
+                <div class="text-xs text-gray-300">Vehículos activos</div>
               </div>
               <div class="text-center">
                 <div class="text-2xl font-bold text-teal">18</div>
-                <div class="text-xs text-gray-400">Entregas hoy</div>
+                <div class="text-xs text-gray-300">Entregas hoy</div>
               </div>
               <div class="text-center">
                 <div class="text-2xl font-bold text-white">96%</div>
-                <div class="text-xs text-gray-400">En horario</div>
+                <div class="text-xs text-gray-300">En horario</div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Floating Card -->
         <div class="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-xl p-4 w-56 hidden lg:block">
           <div class="flex items-start gap-3">
             <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
@@ -63,23 +72,19 @@ const mapImageUrl = '/mapa-nocturno.png';
             </div>
             <div>
               <div class="text-sm font-semibold text-navy">Entrega completada</div>
-              <div class="text-xs text-gray-500 mt-1">Orden #4521 completada en centro de distribución</div>
-              <div class="text-xs text-gray-400 mt-2">Hace 2 min</div>
+              <div class="text-xs text-gray-600 mt-1">Orden #4521 completada en centro de distribución</div>
+              <div class="text-xs text-gray-600 mt-2">Hace 2 min</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Right - Content -->
       <div class="order-1 lg:order-2">
         <div class="inline-flex items-center gap-2 bg-blue/10 text-blue px-4 py-2 rounded-full text-sm font-medium mb-6">
           Monitoreo operativo
         </div>
 
-        <h2
-          data-scroll-fill-map
-          class="scroll-fill-title text-3xl sm:text-4xl font-bold leading-tight"
-        >
+        <h2 data-scroll-fill-map class="scroll-fill-title text-3xl sm:text-4xl font-bold leading-tight">
           <span class="scroll-fill-line">
             <span class="scroll-fill-word">Visibilidad</span>
             <span class="scroll-fill-word">completa</span>
@@ -107,7 +112,7 @@ const mapImageUrl = '/mapa-nocturno.png';
             </div>
             <div>
               <div class="font-semibold text-navy">Telemetría en tiempo real</div>
-              <div class="text-sm text-gray-500">Sin hardware costoso: inteligencia basada en datos y procesos.</div>
+              <div class="text-sm text-gray-600">Sin hardware costoso: inteligencia basada en datos y procesos.</div>
             </div>
           </li>
           <li class="flex items-start gap-3">
@@ -118,7 +123,7 @@ const mapImageUrl = '/mapa-nocturno.png';
             </div>
             <div>
               <div class="font-semibold text-navy">Gestión documental operativa</div>
-              <div class="text-sm text-gray-500">Emití remitos, controlá seguros y recibí alertas de vencimiento.</div>
+              <div class="text-sm text-gray-600">Emití remitos, controlá seguros y recibí alertas de vencimiento.</div>
             </div>
           </li>
           <li class="flex items-start gap-3">
@@ -129,15 +134,12 @@ const mapImageUrl = '/mapa-nocturno.png';
             </div>
             <div>
               <div class="font-semibold text-navy">Notificaciones de eventos en ruta</div>
-              <div class="text-sm text-gray-500">Alertas en tiempo real sobre desvíos, demoras y eventos críticos.</div>
+              <div class="text-sm text-gray-600">Alertas en tiempo real sobre desvíos, demoras y eventos críticos.</div>
             </div>
           </li>
         </ul>
 
-        <a
-          href="/services"
-          class="inline-flex items-center gap-2 mt-8 text-blue font-semibold hover:underline"
-        >
+        <a href="/services" class="inline-flex items-center gap-2 mt-8 text-blue font-semibold hover:underline">
           Solicitá una prueba gratuita
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -156,7 +158,7 @@ const mapImageUrl = '/mapa-nocturno.png';
   .scroll-fill-word {
     display: inline-block;
     margin-right: 0.22em;
-    color: #9ca9b6;
+    color: #556a80;
     transition: color 180ms ease;
   }
 
@@ -176,21 +178,22 @@ const mapImageUrl = '/mapa-nocturno.png';
   const setupMapScrollFill = () => {
     const safeWindow = window as any;
 
-    if (typeof safeWindow.__mapScrollFillCleanup === 'function') {
+    if (typeof safeWindow.__mapScrollFillCleanup === "function") {
       safeWindow.__mapScrollFillCleanup();
     }
 
-    const title = document.querySelector('[data-scroll-fill-map]');
+    const title = document.querySelector("[data-scroll-fill-map]");
     if (!(title instanceof HTMLElement)) {
       safeWindow.__mapScrollFillCleanup = null;
       return;
     }
 
-    const words = Array.from(title.querySelectorAll('.scroll-fill-word'));
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const words = Array.from(title.querySelectorAll(".scroll-fill-word"));
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const isMobile = window.matchMedia("(max-width: 1023px)");
 
-    if (reduceMotion.matches) {
-      words.forEach((word) => word.classList.add('is-filled'));
+    if (reduceMotion.matches || isMobile.matches) {
+      words.forEach((word) => word.classList.add("is-filled"));
       safeWindow.__mapScrollFillCleanup = null;
       return;
     }
@@ -209,7 +212,7 @@ const mapImageUrl = '/mapa-nocturno.png';
       const activeWords = Math.floor(progress * words.length);
 
       words.forEach((word, index) => {
-        word.classList.toggle('is-filled', index < activeWords);
+        word.classList.toggle("is-filled", index < activeWords);
       });
     };
 
@@ -220,21 +223,19 @@ const mapImageUrl = '/mapa-nocturno.png';
       }
     };
 
-    window.addEventListener('scroll', requestUpdate, { passive: true });
-    window.addEventListener('resize', requestUpdate);
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
     updateProgress();
 
     safeWindow.__mapScrollFillCleanup = () => {
-      window.removeEventListener('scroll', requestUpdate);
-      window.removeEventListener('resize', requestUpdate);
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
     };
   };
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupMapScrollFill, { once: true });
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupMapScrollFill, { once: true });
   } else {
     setupMapScrollFill();
   }
-
-  document.addEventListener('astro:page-load', setupMapScrollFill);
 </script>

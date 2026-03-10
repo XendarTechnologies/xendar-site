@@ -6,6 +6,7 @@
     "dev": "astro dev --host",
     "dev:poll": "CHOKIDAR_USEPOLLING=1 CHOKIDAR_INTERVAL=100 astro dev --host",
     "build": "astro build",
+    "optimize:media": "node scripts/optimize-media.mjs",
     "preview": "astro preview",
     "perf:preview": "npm run build && astro preview --host --port 4322",
     "astro": "astro"
@@ -19,6 +20,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
     "@astrojs/vercel": "^9.0.4",
+    "sharp": "^0.34.4",
     "typescript": "^5.9.3",
     "vite-plugin-compression": "^0.5.1"
   }

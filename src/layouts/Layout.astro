@@ -1,7 +1,6 @@
 ---
-import '../styles/global.css';
-import { ClientRouter } from 'astro:transitions';
-import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import "../styles/global.css";
+import WhatsAppFloat from "../components/WhatsAppFloat.astro";
 
 interface Props {
   title?: string;
@@ -16,7 +15,7 @@ interface Props {
   bodyClass?: string;
 }
 
-const { 
+const {
   title = "Xendar | Optimización logística para empresas de transporte de carga",
   description = "Xendar optimiza operaciones de transporte de carga con inteligencia de datos: reduce costo por kilómetro, combustible, mantenimiento y kilómetros vacíos.",
   keywords = "software de logística, software para empresas de transporte, optimización logística, software para transporte de carga, plataforma logística, gestión de flotas de camiones, optimización de transporte de carga, reducción de kilómetros vacíos, optimización de rutas de camiones, software de eficiencia logística, costo por kilómetro transporte, control de combustible flota, mantenimiento predictivo camiones",
@@ -26,7 +25,7 @@ const {
   ogImage = "https://xendar.com.ar/logo.png",
   twitterTitle = "Xendar | Optimización logística basada en datos",
   twitterDescription = "Menos kilómetros vacíos, mejor costo por kilómetro y control total de flota.",
-  bodyClass = ""
+  bodyClass = "",
 } = Astro.props;
 
 const organizationLd = {
@@ -38,7 +37,7 @@ const organizationLd = {
   description: "Plataforma de optimización logística para empresas de transporte de carga.",
   foundingArea: "Argentina",
   industry: "Logistics Technology",
-  sameAs: []
+  sameAs: [],
 };
 
 const softwareLd = {
@@ -49,7 +48,7 @@ const softwareLd = {
   operatingSystem: "Web",
   description: "Software de optimización logística para flotas y operaciones de transporte de carga.",
   offers: "SaaS",
-  areaServed: "Latin America"
+  areaServed: "Latin America",
 };
 ---
 
@@ -78,14 +77,10 @@ const softwareLd = {
 
     <link rel="preload" href="/Xendar-Logo.svg" as="image" type="image/svg+xml" />
     <link rel="preload" href="/fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/montserrat-500.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/montserrat-600.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
-    <ClientRouter />
     <script type="application/ld+json" set:html={JSON.stringify(organizationLd)}></script>
     <script type="application/ld+json" set:html={JSON.stringify(softwareLd)}></script>
   </head>

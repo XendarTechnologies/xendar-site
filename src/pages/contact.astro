@@ -1,7 +1,7 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/NavBar.astro';
-import Footer from '../components/Footer.astro';
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/NavBar.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <Layout
@@ -84,7 +84,6 @@ import Footer from '../components/Footer.astro';
               />
             </div>
 
-						
             <div>
               <label for="mensaje" class="block text-sm font-semibold text-navy mb-2">Mensaje</label>
               <textarea
@@ -133,7 +132,7 @@ import Footer from '../components/Footer.astro';
     background-color: #edf3f3;
     background-image:
       linear-gradient(125deg, rgba(237, 243, 243, 0.86) 0%, rgba(237, 243, 243, 0.78) 42%, rgba(237, 243, 243, 0.84) 100%),
-      url('/Background2.png');
+      url('/optimized/Background2.webp');
     background-size: cover, cover;
     background-position: center, center;
     background-repeat: no-repeat, no-repeat;
@@ -156,6 +155,14 @@ import Footer from '../components/Footer.astro';
   @media (min-width: 1024px) {
     .contact-split {
       grid-template-columns: 1.04fr 0.96fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .contact-panel-left {
+      background-image:
+        linear-gradient(125deg, rgba(237, 243, 243, 0.86) 0%, rgba(237, 243, 243, 0.78) 42%, rgba(237, 243, 243, 0.84) 100%),
+        url('/optimized/Background2-mobile.webp');
     }
   }
 </style>
@@ -235,6 +242,4 @@ import Footer from '../components/Footer.astro';
   } else {
     setupContactForm();
   }
-
-  document.addEventListener('astro:page-load', setupContactForm);
 </script>

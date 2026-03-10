@@ -1,4 +1,4 @@
----
+﻿---
 
 ---
 
@@ -12,9 +12,10 @@
         muted
         loop
         playsinline
-        preload="metadata"
+        preload="none"
       >
-        <source src="/video-intro.mp4" type="video/mp4" />
+        <source data-src="/video-intro.mp4" type="video/mp4" />
+        <track kind="captions" src="/captions/video-intro.es.vtt" srclang="es" label="Español" />
       </video>
     </div>
   </div>
@@ -23,14 +24,14 @@
     <div class="intro-text-content">
       <div class="intro-copy-panel relative z-10 max-w-3xl text-center lg:text-left">
         <h2 class="max-w-4xl mx-auto lg:mx-0 text-3xl sm:text-4xl lg:text-5xl font-bold text-center lg:text-left text-navy leading-tight">
-          <span class="block">Cada camiÃ³n genera datos.</span>
+          <span class="block">Cada camión genera datos.</span>
           <span class="block">Xendar los convierte en ahorro real.</span>
         </h2>
         <p class="mt-6 text-lg text-gray-600 leading-relaxed">
-          Analizamos los viajes de tu flota para detectar: kilÃ³metros en vacÃ­o, desvÃ­os innecesarios,
+          Analizamos los viajes de tu flota para detectar: kilómetros en vacío, desvíos innecesarios,
           consumo de combustible y eficiencia de cada ruta.
           <br />
-          Todo sin instalar hardware nuevo, a travÃ©s de los datos GPS del celular del conductor y
+          Todo sin instalar hardware nuevo, a través de los datos GPS del celular del conductor y
           algoritmos avanzados.
         </p>
 
@@ -42,16 +43,17 @@
             muted
             loop
             playsinline
-            preload="metadata"
+            preload="none"
           >
-            <source src="/video-intro.mp4" type="video/mp4" />
+            <source data-src="/video-intro.mp4" type="video/mp4" />
+            <track kind="captions" src="/captions/video-intro.es.vtt" srclang="es" label="Español" />
           </video>
         </div>
       </div>
 
       <div class="mt-6 lg:mt-7 intro-segment-block w-full mx-auto lg:mx-0">
         <p class="intro-segment-title text-center lg:text-left text-base sm:text-lg font-semibold text-navy leading-tight">
-          DiseÃ±ado para operaciones de carga pesada con foco en margen por kilÃ³metro.
+          Diseñado para operaciones de carga pesada con foco en margen por kilómetro.
         </p>
 
         <div class="intro-segment-strip mt-6" role="list" aria-label="Segmentos">
@@ -60,7 +62,7 @@
           <div class="intro-segment-item" role="listitem">PYMES en crecimiento</div>
         </div>
 
-        <div class="intro-segment-carousel mt-6" aria-label="Segmentos mÃ³viles">
+        <div class="intro-segment-carousel mt-6" aria-label="Segmentos móviles">
           <div class="intro-segment-track">
             <div class="intro-segment-chip">Flotas propias</div>
             <div class="intro-segment-chip">Operadores regionales</div>
@@ -328,8 +330,24 @@
 
 <script>
   const setupIntroVideoPlayback = () => {
+    const safeWindow = window as any;
+    if (safeWindow.__introVideoReady) {
+      return;
+    }
+    safeWindow.__introVideoReady = true;
+
     const videos = Array.from(document.querySelectorAll('.intro-video-el'));
     if (!videos.length) return;
+
+    const hydrateAndPlay = (video: HTMLVideoElement) => {
+      const source = video.querySelector('source[type="video/mp4"]');
+      if (source instanceof HTMLSourceElement && !source.src && source.dataset.src) {
+        source.src = source.dataset.src;
+        video.load();
+      }
+
+      video.play().catch(() => {});
+    };
 
     videos.forEach((video) => {
       if (!(video instanceof HTMLVideoElement)) return;
@@ -338,8 +356,27 @@
       video.loop = true;
       video.setAttribute('muted', '');
       video.setAttribute('playsinline', '');
-      video.load();
-      video.play().catch(() => {});
+      if (video.textTracks && video.textTracks.length) {
+        Array.from(video.textTracks).forEach((track) => {
+          track.mode = 'hidden';
+        });
+      }
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              hydrateAndPlay(video);
+              observer.disconnect();
+            });
+          },
+          { rootMargin: '120px 0px', threshold: 0.1 }
+        );
+        observer.observe(video);
+      } else {
+        hydrateAndPlay(video);
+      }
     });
   };
 
@@ -348,11 +385,4 @@
   } else {
     setupIntroVideoPlayback();
   }
-
-  document.addEventListener('astro:page-load', setupIntroVideoPlayback);
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') {
-      setupIntroVideoPlayback();
-    }
-  });
 </script>

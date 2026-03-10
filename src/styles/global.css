@@ -5,7 +5,7 @@
   src: url("/fonts/montserrat-400.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
-  font-display: block;
+  font-display: swap;
 }
 
 @font-face {
@@ -13,7 +13,7 @@
   src: url("/fonts/montserrat-500.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
-  font-display: block;
+  font-display: swap;
 }
 
 @font-face {
@@ -21,7 +21,7 @@
   src: url("/fonts/montserrat-600.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
-  font-display: block;
+  font-display: swap;
 }
 
 @font-face {
@@ -29,7 +29,7 @@
   src: url("/fonts/montserrat-700.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
-  font-display: block;
+  font-display: swap;
 }
 
 @font-face {
@@ -37,7 +37,7 @@
   src: url("/fonts/montserrat-800.woff2") format("woff2");
   font-weight: 800;
   font-style: normal;
-  font-display: block;
+  font-display: swap;
 }
 
 @theme inline {
@@ -134,7 +134,7 @@ body.page-home::before {
   right: 0;
   left: 0;
   height: 145vh;
-  background-image: url('/Background1.png');
+  background-image: url('/optimized/Background1.webp');
   background-position: 80% -420px;
   background-repeat: no-repeat;
   background-size: cover;
@@ -185,7 +185,7 @@ body.page-about::before {
   left: 0;
   pointer-events: none;
   z-index: -1;
-  background-image: url('/Background2.png');
+  background-image: url('/optimized/Background2.webp');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center -130px;
@@ -219,7 +219,7 @@ body.page-contact::before {
   left: 0;
   pointer-events: none;
   z-index: -1;
-  background-image: url('/Background1.png');
+  background-image: url('/optimized/Background1.webp');
   background-repeat: no-repeat;
   background-size: cover;
   height: 180vh;
@@ -276,6 +276,7 @@ body.page-contact::after {
 @media (max-width: 768px) {
   body.page-home::before {
     height: 140vh;
+    background-image: url('/optimized/Background1-mobile.webp');
     background-position: 66% -140px;
     background-size: cover;
     -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 80%, rgba(0, 0, 0, 0.5) 94%, transparent 100%);
@@ -284,11 +285,13 @@ body.page-contact::after {
 
   body.page-about::before {
     height: 150vh;
+    background-image: url('/optimized/Background2-mobile.webp');
     background-position: 58% 20px;
   }
 
   body.page-contact::before {
     height: 110vh;
+    background-image: url('/optimized/Background1-mobile.webp');
     background-position: 64% -120px;
     -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 88%, rgba(0, 0, 0, 0.7) 96%, transparent 100%);
     mask-image: linear-gradient(to bottom, #000 0%, #000 88%, rgba(0, 0, 0, 0.7) 96%, transparent 100%);

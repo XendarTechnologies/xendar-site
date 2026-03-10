@@ -3,26 +3,40 @@
 ---
 
 <section id="intro" class="relative z-10 py-16 lg:py-24 lg:h-200 bg-white overflow-hidden">
+  <div class="intro-video-layer pointer-events-none absolute hidden lg:block z-0">
+    <div class="intro-video-fade absolute inset-0">
+      <video
+        class="intro-video-el h-full w-full object-contain opacity-72"
+        style="object-position: right bottom;"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+      >
+        <source src="/video-intro.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </div>
+
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="intro-text-content">
       <div class="intro-copy-panel relative z-10 max-w-3xl text-center lg:text-left">
         <h2 class="max-w-4xl mx-auto lg:mx-0 text-3xl sm:text-4xl lg:text-5xl font-bold text-center lg:text-left text-navy leading-tight">
-          <span class="block">Cada camión genera datos.</span>
+          <span class="block">Cada camiÃ³n genera datos.</span>
           <span class="block">Xendar los convierte en ahorro real.</span>
         </h2>
         <p class="mt-6 text-lg text-gray-600 leading-relaxed">
-          Analizamos los viajes de tu flota para detectar: kilómetros en vacío, desvíos innecesarios,
+          Analizamos los viajes de tu flota para detectar: kilÃ³metros en vacÃ­o, desvÃ­os innecesarios,
           consumo de combustible y eficiencia de cada ruta.
           <br />
-          Todo sin instalar hardware nuevo, a través de los datos GPS del celular del conductor y
+          Todo sin instalar hardware nuevo, a travÃ©s de los datos GPS del celular del conductor y
           algoritmos avanzados.
         </p>
-      </div>
 
-      <div class="intro-video-block pointer-events-none mt-8 w-full max-w-md mx-auto lg:mt-0 lg:max-w-none">
-        <div class="intro-video-fade">
+        <div class="mt-8 lg:hidden w-full max-w-md mx-auto">
           <video
-            class="intro-video-el w-full h-auto object-contain opacity-72"
+            class="intro-video-el intro-mobile-video w-full h-auto object-contain opacity-72"
             style="object-position: center bottom;"
             autoplay
             muted
@@ -37,7 +51,7 @@
 
       <div class="mt-6 lg:mt-7 intro-segment-block w-full mx-auto lg:mx-0">
         <p class="intro-segment-title text-center lg:text-left text-base sm:text-lg font-semibold text-navy leading-tight">
-          Diseñado para operaciones de carga pesada con foco en margen por kilómetro.
+          DiseÃ±ado para operaciones de carga pesada con foco en margen por kilÃ³metro.
         </p>
 
         <div class="intro-segment-strip mt-6" role="list" aria-label="Segmentos">
@@ -46,7 +60,7 @@
           <div class="intro-segment-item" role="listitem">PYMES en crecimiento</div>
         </div>
 
-        <div class="intro-segment-carousel mt-6" aria-label="Segmentos móviles">
+        <div class="intro-segment-carousel mt-6" aria-label="Segmentos mÃ³viles">
           <div class="intro-segment-track">
             <div class="intro-segment-chip">Flotas propias</div>
             <div class="intro-segment-chip">Operadores regionales</div>
@@ -94,7 +108,7 @@
   .intro-segment-strip {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    border: 1px solid rgba(36, 59, 90, 0.10);
+    border: 1px solid rgba(36, 59, 90, 0.1);
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.52);
     overflow: hidden;
@@ -150,76 +164,62 @@
   }
 
   @media (min-width: 1024px) {
-    .intro-video-block {
-      position: absolute;
-      top: 0.7rem;
-      bottom: 0.2rem;
-      right: -120px;
-      width: 1080px;
-      z-index: 0;
-    }
-
-    .intro-video-el {
-      height: 100%;
-    }
-
     .intro-segment-block {
       margin-inline: 0;
     }
   }
 
   @media (min-width: 1821px) {
-    .intro-video-block {
+    .intro-video-layer {
       right: -150px;
       width: 1320px;
     }
   }
 
   @media (min-width: 1681px) and (max-width: 1820px) {
-    .intro-video-block {
+    .intro-video-layer {
       right: -150px;
       width: 1320px;
     }
   }
 
   @media (min-width: 1501px) and (max-width: 1680px) {
-    .intro-video-block {
+    .intro-video-layer {
       right: -250px;
       width: 1320px;
     }
   }
 
   @media (min-width: 1351px) and (max-width: 1500px) {
-    .intro-video-block {
+    .intro-video-layer {
       right: -300px;
       width: 1280px;
     }
   }
 
   @media (min-width: 1281px) and (max-width: 1350px) {
-    .intro-video-block {
+    .intro-video-layer {
       right: -370px;
       width: 1250px;
     }
   }
 
   @media (min-width: 1201px) and (max-width: 1281px) {
-    .intro-video-block {
+    .intro-video-layer {
       right: -400px;
       width: 1220px;
     }
   }
 
-
   @media (min-width: 1151px) and (max-width: 1200px) {
-    .intro-video-block {
+    .intro-video-layer {
       right: -400px;
       width: 1180px;
     }
   }
 
   @media (min-width: 1024px) and (max-width: 1150px) {
-    .intro-video-block {
+    .intro-video-layer {
       right: -450px;
       width: 1180px;
     }
@@ -259,13 +259,17 @@
   }
 
   @media (width: 1024px) and (height: 1366px) {
-    .intro-video-block {
+    .intro-video-layer {
       right: -500px;
     }
   }
 
   @media (max-width: 1023px) {
-    .intro-video-block {
+    .intro-copy-panel > .mt-8.lg\:hidden {
+      margin-top: 0.5rem;
+    }
+
+    .intro-mobile-video {
       transform: translateX(-15%);
       width: 130%;
       max-width: none;
@@ -324,17 +328,31 @@
 
 <script>
   const setupIntroVideoPlayback = () => {
-    const video = document.querySelector('.intro-video-el');
-    if (!(video instanceof HTMLVideoElement)) return;
-    if (video.dataset.ready === 'true') return;
-    video.muted = true;
-    video.playsInline = true;
-    video.loop = true;
-    video.setAttribute('muted', '');
-    video.setAttribute('playsinline', '');
-    video.dataset.ready = 'true';
-    video.play().catch(() => {});
+    const videos = Array.from(document.querySelectorAll('.intro-video-el'));
+    if (!videos.length) return;
+
+    videos.forEach((video) => {
+      if (!(video instanceof HTMLVideoElement)) return;
+      video.muted = true;
+      video.playsInline = true;
+      video.loop = true;
+      video.setAttribute('muted', '');
+      video.setAttribute('playsinline', '');
+      video.load();
+      video.play().catch(() => {});
+    });
   };
 
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupIntroVideoPlayback, { once: true });
+  } else {
+    setupIntroVideoPlayback();
+  }
+
   document.addEventListener('astro:page-load', setupIntroVideoPlayback);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      setupIntroVideoPlayback();
+    }
+  });
 </script>

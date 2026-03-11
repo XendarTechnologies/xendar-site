@@ -1,5 +1,6 @@
----
+﻿---
 import "../styles/global.css";
+import Analytics from "@vercel/analytics/astro";
 import WhatsAppFloat from "../components/WhatsAppFloat.astro";
 
 interface Props {
@@ -90,5 +91,6 @@ const softwareLd = {
   <body class={`min-h-screen antialiased ${bodyClass}`.trim()}>
     <slot />
     <WhatsAppFloat />
+    <Analytics />
   </body>
 </html>
